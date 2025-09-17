@@ -7,8 +7,25 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Cartoon {
+  id    Int     @id @default(autoincrement())
+  name  String
+  toons Toon[]
+  stats Stats[]
+}
+
 model Toon {
-  id        Int    @id @default(autoincrement())
-  name      String
-  image_url String
+  id         Int     @id @default(autoincrement())
+  name       String
+  image_url  String
+  cartoon_id Int
+  cartoon    Cartoon @relation(fields: [cartoon_id], references: [id])
+}
+
+model Stats {
+  id         Int     @id @default(autoincrement())
+  key        String
+  value      String
+  cartoon_id Int
+  cartoon    Cartoon @relation(fields: [cartoon_id], references: [id])
 }

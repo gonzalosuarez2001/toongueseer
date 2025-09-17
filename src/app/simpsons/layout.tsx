@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Simpsons",
-  description: "Guess the Simpsons character",
+  description: "Guess the Simpsons Character",
 };
 
 export default function SimpsonsLayout({
