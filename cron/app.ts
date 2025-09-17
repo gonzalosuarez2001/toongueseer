@@ -11,10 +11,19 @@ const app = express();
 // DB
 const prisma = new PrismaClient();
 
-// Cron Job Function
+// Utility Functions
+function getRandomInt( max: number): number {
+  return Math.floor(Math.random() * max) + 1;
+}
+
+
 async function resetDailyToons() {
-    // resetear los toons de todos los cartoons
-  const toons = await prisma.toon.findMany();
+  const cartoons = await prisma.cartoon.findMany();
+
+  await Promise.all(cartoons.map((cartoon:)=>{
+    const toons = await prisma.toons.findMany()
+    const selectedToon = getRandomInt(toons.length)
+  }))
 }
 
 // Cron

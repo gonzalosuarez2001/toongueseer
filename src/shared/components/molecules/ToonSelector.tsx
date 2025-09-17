@@ -15,8 +15,21 @@ export default function ToonSelector({ toons }: { toons: Toon[] }) {
     toon.name.toLowerCase().includes(value.toLowerCase())
   );
 
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape" && inputRef.current) {
+        inputRef.current.blur(); 
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, []);
+
   return (
-    <div className="relative bg-white/70 border-4 border-simpsons rounded-lg mt-5">
+    <div className="relative">
       <input
         ref={inputRef}
         value={value}
@@ -28,7 +41,7 @@ export default function ToonSelector({ toons }: { toons: Toon[] }) {
         className="w-full border border-none outline-none p-4"
       />
       {isOpen && (
-        <div className="absolute w-full flex flex-col left-0 top-16 bg-white/70 max-h-50 overflow-y-scroll scrollbar-simpsons rounded-lg">
+        <div className="absolute w-full flex flex-col left-0 top-16 bg-white/70 max-h-55 overflow-y-scroll scrollbar-simpsons rounded-lg">
           {filteredToons.map((toon) => {
             return (
               <div

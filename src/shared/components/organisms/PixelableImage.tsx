@@ -1,8 +1,8 @@
 "use client";
 import { useRef, useEffect, useState } from "react";
 
-const saturationLevels = [0.1,0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9];
-const pixelationLevels = [10, 15, 20, 25, 30, 35, 40, 45, 50];
+const saturationLevels = [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9];
+const pixelationLevels = [1, 10, 15, 20, 25, 30, 35, 40, 45, 50];
 const rotations = [90, 180, 270];
 
 export default function PixelableImage({
@@ -11,17 +11,19 @@ export default function PixelableImage({
   height,
   dificulty,
   enableSaturation = true,
+  enableRotation = true,
 }: {
   src: string;
   width: number;
   height: number;
   dificulty: number;
   enableSaturation?: boolean;
+  enableRotation?: boolean;
 }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
-  const pixelation = pixelationLevels[dificulty - 1];
-  const saturation = saturationLevels[dificulty - 1];
+  const pixelation = pixelationLevels[dificulty];
+  const saturation = enableSaturation ? saturationLevels[dificulty] : 0;
 
   useEffect(() => {
     const img = new Image();
@@ -49,29 +51,24 @@ export default function PixelableImage({
       // Dibujar la imagen encima, escalada al canvas reducido
       tempCtx.drawImage(img, 0, 0, reducedWidth, reducedHeight);
 
-      if (enableSaturation) {
-        // Convertir a escala de grises
-        const imageData = tempCtx.getImageData(
-          0,
-          0,
-          reducedWidth,
-          reducedHeight
-        );
-        const data = imageData.data;
-        for (let i = 0; i < data.length; i += 4) {
-          // promedio de RGB
-          const gray =
-            0.299 * data[i] + 0.587 * data[i + 1] + 0.114 * data[i + 2];
+      // Convertir a escala de grises
+      const imageData = tempCtx.getImageData(0, 0, reducedWidth, reducedHeight);
+      const data = imageData.data;
+      for (let i = 0; i < data.length; i += 4) {
+        // promedio de RGB
+        const gray =
+          0.299 * data[i] + 0.587 * data[i + 1] + 0.114 * data[i + 2];
 
-          data[i] = data[i] * (1 - saturation) + gray * saturation; // R
-          data[i + 1] = data[i + 1] * (1 - saturation) + gray * saturation; // G
-          data[i + 2] = data[i + 2] * (1 - saturation) + gray * saturation; // B
-        }
-        tempCtx.putImageData(imageData, 0, 0);
+        data[i] = data[i] * (1 - saturation) + gray * saturation; // R
+        data[i + 1] = data[i + 1] * (1 - saturation) + gray * saturation; // G
+        data[i + 2] = data[i + 2] * (1 - saturation) + gray * saturation; // B
       }
+      tempCtx.putImageData(imageData, 0, 0);
 
       // Seleccionar una rotación aleatoria
-      const angleDeg = rotations[Math.floor(Math.random() * rotations.length)];
+      const angleDeg = enableRotation
+        ? rotations[Math.floor(Math.random() * rotations.length)]
+        : 0;
       const angleRad = (angleDeg * Math.PI) / 180;
 
       ctx.imageSmoothingEnabled = false;

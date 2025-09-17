@@ -35,14 +35,18 @@ export default async function Simpsons() {
           <div>
             <div className="bg-white/70 border-4 border-simpsons p-4 rounded-lg">
               <PixelableImage
-                src="/simpsons_toons/42.webp"
+                src="/simpsons_toons/41.webp"
                 width={300}
                 height={300}
-                dificulty={9}
+                dificulty={7}
                 enableSaturation={true}
+                enableRotation={false}
               />
             </div>
-            <ToonSelector toons={toons} />
+            <div className="bg-white/70 border-4 border-simpsons rounded-lg mt-5">
+              <ToonSelector toons={toons} />
+            </div>
+            <div className="bg-white/70 border-4 border-simpsons rounded-lg h-20 my-20"></div>
           </div>
         </div>
       </div>
