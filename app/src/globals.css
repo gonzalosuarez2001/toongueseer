@@ -1,0 +1,68 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+
+@import "tailwindcss";
+
+@theme inline {
+  --font-montserrat: "Montserrat";
+  --color-simpsons: #ffe205;
+  --animate-flash-red: flashRed 1s ease-in-out;
+}
+
+@utility bg-toon-simpsons {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("../public/simpsons_bg.jpg");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+@utility animate-flash-red {
+  animation: var(--animate-flash-red);
+}
+
+@utility scrollbar-hidden {
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@utility scrollbar-shown {
+  &::-webkit-scrollbar {
+    display: block;
+  }
+}
+
+@utility scrollbar-simpsons {
+  &::-webkit-scrollbar {
+    width: 15px;
+    height: 15px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: var(--color-gray-200);
+    border-radius: 8px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--color-simpsons);
+    border-radius: 8px;
+  }
+}
+
+@keyframes flashRed {
+  0% {
+    background-color: auto;
+  }
+  50% {
+    background-color:rgba(255, 99, 102, 0.7);
+  }
+  100% {
+    background-color: auto;
+  }
+}
+
+body {
+  font-family: var(--font-montserrat);
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
