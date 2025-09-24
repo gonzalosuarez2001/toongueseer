@@ -2,23 +2,23 @@
 import React, { use, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import type { Toon } from "../../types";
+import { useToon } from "@/shared/hooks/ToonProvider";
 
-export default function ToonTracker({
-  triedToons,
-  cartoon,
-}: {
-  triedToons: Toon[];
-  cartoon: string;
-}) {
+export default function ToonTracker() {
+  const { triedToons, solved } = useToon();
+
   return (
     <div className="flex flex-col gap-2 mt-5">
       {triedToons.map((toon, index) => {
         return (
-          <div className="bg-simpsons/80 border-4 border-simpsons rounded-lg">
+          <div
+            key={index}
+            className="bg-simpsons/80 border-4 border-simpsons rounded-lg"
+          >
             <div
               key={toon.id}
               className={`${
-                index == 0 && "animate-flash-red"
+                index == 0 && !solved && "animate-flash-red"
               } flex items-center p-2`}
             >
               <Image
@@ -28,7 +28,7 @@ export default function ToonTracker({
                 height={60}
                 className="border-2 border-gray-700 rounded-lg p-1 bg-white"
               />
-              <p className="ms-4 font-semibold text-gray-700">{toon.name}</p>
+              <p className="ms-4">{toon.name}</p>
             </div>
           </div>
         );

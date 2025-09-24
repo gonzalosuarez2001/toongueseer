@@ -1,0 +1,30 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Cartoon {
+  id    Int    @id @default(autoincrement())
+  name  String
+  Stats Stats?
+  Toon  Toon[]
+}
+
+model Stats {
+  cartoon_id Int     @id
+  daily_toon Int     @default(1)
+  Cartoon    Cartoon @relation(fields: [cartoon_id], references: [id])
+}
+
+model Toon {
+  id         Int     @id @default(autoincrement())
+  name       String
+  image_url  String
+  cartoon_id Int
+  guessed    Boolean @default(false)
+  Cartoon    Cartoon @relation(fields: [cartoon_id], references: [id])
+}

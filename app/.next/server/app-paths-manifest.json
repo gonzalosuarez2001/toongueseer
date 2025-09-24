@@ -1,3 +1,5 @@
 {
+  "/api/simpsons/route": "app/api/simpsons/route.js",
+  "/page": "app/page.js",
   "/simpsons/page": "app/simpsons/page.js"
 }

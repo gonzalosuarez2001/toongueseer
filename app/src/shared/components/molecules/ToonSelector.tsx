@@ -2,16 +2,12 @@
 import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import type { Toon } from "../../types";
+import { useToon } from "@/shared/hooks/ToonProvider";
 
-export default function ToonSelector({
-  toons,
-  cartoon,
-  loadAnswers
-}: {
-  toons: Toon[];
-  cartoon: string;
-  loadAnswers: () => void;
-}) {
+export default function ToonSelector() {
+  const { addTriedToon, addCounter, dailyToon, cartoon, toons, setSolved } =
+    useToon();
+
   const inputRef = useRef<HTMLInputElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -22,17 +18,15 @@ export default function ToonSelector({
   const isOpen: boolean = value.trim() !== "" && isFocused;
 
   const handleSelect = async (id: number) => {
-    const previousAnswers = localStorage.getItem(`${cartoon}_answers`);
-    if (previousAnswers) {
-      const answers = JSON.parse(previousAnswers);
-      localStorage.setItem(
-        `${cartoon}_answers`,
-        JSON.stringify([...answers, id])
-      );
-    } else {
-      localStorage.setItem(`${cartoon}_answers`, JSON.stringify([id]));
+    if (id === dailyToon) {
+      localStorage.setItem(`${cartoon}_solved`, "true");
+      setSolved(true);
+      return;
     }
-    loadAnswers()
+
+    addTriedToon(id);
+    addCounter();
+
     setIsFocused(false);
     if (inputRef.current) {
       setValue("");
@@ -81,7 +75,7 @@ export default function ToonSelector({
   }, []);
 
   return (
-    <div className="relative">
+    <div className="relative bg-white/80 border-4 border-simpsons rounded-lg mt-5">
       <input
         ref={inputRef}
         value={value}
@@ -89,12 +83,12 @@ export default function ToonSelector({
         onFocus={() => setIsFocused(true)}
         type="text"
         placeholder="Buscar..."
-        className="w-full border border-none outline-none p-4"
+        className="w-full border border-none outline-none p-4 "
       />
       {isOpen && (
         <div
           ref={containerRef}
-          className="absolute w-full flex flex-col left-0 top-16 bg-white/80 max-h-55 overflow-y-scroll scrollbar-simpsons rounded-lg"
+          className="absolute w-full flex flex-col left-0 top-16 bg-white max-h-55 overflow-y-scroll scrollbar-simpsons rounded-lg"
         >
           {filteredToons.map((toon) => {
             return (
@@ -110,12 +104,12 @@ export default function ToonSelector({
                   height={60}
                   className="border-2 border-gray-700 rounded-lg p-1 bg-white"
                 />
-                <p className="ms-4 font-semibold text-gray-700">{toon.name}</p>
+                <p className="ms-4 ">{toon.name}</p>
               </button>
             );
           })}
           {filteredToons.length === 0 && (
-            <p className="p-4 text-gray-700 font-medium">No se encontraron resultados</p>
+            <p className="p-4">No se encontraron resultados</p>
           )}
         </div>
       )}
