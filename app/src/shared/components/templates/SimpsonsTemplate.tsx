@@ -10,6 +10,7 @@ import ToonFooter from "../organisms/ToonFooter";
 import ToonSelector from "../molecules/ToonSelector";
 import ToonTracker from "../molecules/ToonTracker";
 import ToonCongrats from "../organisms/ToonCongrats";
+import ToonControls from "../organisms/ToonControls";
 
 export default function SimpsonsTemplate({
   toons,
@@ -40,8 +41,9 @@ export default function SimpsonsTemplate({
 
   return (
     <div className="relative min-h-screen w-screen flex justify-center bg-toon-simpsons font-medium text-xl text-gray-700">
-      <div>
+      <div className="max-w-84">
         <ToonHeader />
+        <ToonControls />
         <ToonImage />
         <ToonCongrats />
         <ToonSelector />

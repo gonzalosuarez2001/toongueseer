@@ -6,8 +6,15 @@ import { useToon } from "@/shared/hooks/ToonContext";
 import confetti from "canvas-confetti";
 
 export default function ToonSelector() {
-  const { addTriedToon, addCounter, dailyToon, cartoon, toons, setSolved } =
-    useToon();
+  const {
+    addTriedToon,
+    addCounter,
+    dailyToon,
+    cartoon,
+    toons,
+    setSolved,
+    solved,
+  } = useToon();
 
   const inputRef = useRef<HTMLInputElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -17,7 +24,6 @@ export default function ToonSelector() {
   const [isFocused, setIsFocused] = useState<boolean>(false);
 
   const isOpen: boolean = value.trim() !== "" && isFocused;
-
 
   const shootConfetti = () => {
     confetti({
@@ -106,44 +112,48 @@ export default function ToonSelector() {
   }, []);
 
   return (
-    <div className="relative bg-white/80 border-4 border-simpsons rounded-lg mt-5 z-10">
-      <input
-        ref={inputRef}
-        value={value}
-        onChange={(e) => setValue(e.target.value)}
-        onFocus={() => setIsFocused(true)}
-        type="text"
-        placeholder="Search..."
-        className="w-full border border-none outline-none p-4 "
-      />
-      {isOpen && (
-        <div
-          ref={containerRef}
-          className="absolute w-full flex flex-col left-0 top-16 bg-white max-h-55 overflow-y-scroll scrollbar-simpsons rounded-lg"
-        >
-          {filteredToons.map((toon) => {
-            return (
-              <button
-                onClick={() => handleSelect(toon.id)}
-                key={toon.id}
-                className="flex items-center p-2 hover:bg-gray-100/80 transition-colors cursor-pointer"
-              >
-                <Image
-                  src={"/simpsons_toons" + toon.image_url}
-                  alt="Simpsons Character"
-                  width={60}
-                  height={60}
-                  className="border-2 border-gray-700 rounded-lg p-1 bg-white"
-                />
-                <p className="ms-4 ">{toon.name}</p>
-              </button>
-            );
-          })}
-          {filteredToons.length === 0 && (
-            <p className="p-4">No se encontraron resultados</p>
+    <>
+      {!solved && (
+        <div className="relative bg-white/80 border-4 border-simpsons rounded-lg mt-5 z-10">
+          <input
+            ref={inputRef}
+            value={value}
+            onChange={(e) => setValue(e.target.value)}
+            onFocus={() => setIsFocused(true)}
+            type="text"
+            placeholder="Search..."
+            className="w-full border border-none outline-none p-4 "
+          />
+          {isOpen && (
+            <div
+              ref={containerRef}
+              className="absolute w-full flex flex-col left-0 top-16 bg-white max-h-55 overflow-y-scroll scrollbar-simpsons rounded-lg"
+            >
+              {filteredToons.map((toon) => {
+                return (
+                  <button
+                    onClick={() => handleSelect(toon.id)}
+                    key={toon.id}
+                    className="flex items-center p-2 hover:bg-gray-100/80 transition-colors cursor-pointer"
+                  >
+                    <Image
+                      src={"/simpsons_toons" + toon.image_url}
+                      alt="Simpsons Character"
+                      width={60}
+                      height={60}
+                      className="border-2 border-gray-700 rounded-lg p-1 bg-white"
+                    />
+                    <p className="ms-4 ">{toon.name}</p>
+                  </button>
+                );
+              })}
+              {filteredToons.length === 0 && (
+                <p className="p-4">No se encontraron resultados</p>
+              )}
+            </div>
           )}
         </div>
       )}
-    </div>
+    </>
   );
 }

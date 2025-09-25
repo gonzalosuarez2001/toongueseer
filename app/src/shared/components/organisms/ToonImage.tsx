@@ -24,6 +24,7 @@ export default function ToonImage() {
     if (hasMounted) {
       triggerMistakeAnimation();
     } else if (counter > 0) {
+      triggerMistakeAnimation();
       setHasMounted(true);
     }
   }, [counter]);
@@ -33,7 +34,7 @@ export default function ToonImage() {
       ref={divRef}
       className={`${
         solved && "animate-scale"
-      } bg-white/80 border-4 border-simpsons p-4 rounded-lg mt-10`}
+      } bg-white/80 border-4 border-simpsons p-4 rounded-lg mt-5 flex justify-center items-center flex-col`}
     >
       <PixelableImage
         src={`/simpsons_toons/${dailyToon}.webp`}
