@@ -2,7 +2,7 @@
 import React, { use, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import type { Toon } from "../../types";
-import { useToon } from "@/shared/hooks/ToonProvider";
+import { useToon } from "@/shared/hooks/ToonContext";
 
 export default function ToonTracker() {
   const { triedToons, solved } = useToon();
@@ -12,11 +12,10 @@ export default function ToonTracker() {
       {triedToons.map((toon, index) => {
         return (
           <div
-            key={index}
-            className="bg-simpsons/80 border-4 border-simpsons rounded-lg"
+            key={toon.id}
+            className={`${index == 0 && !solved && "animate-scale"} text-2xl bg-simpsons/80 border-4 border-simpsons rounded-lg transition-transform`}
           >
             <div
-              key={toon.id}
               className={`${
                 index == 0 && !solved && "animate-flash-red"
               } flex items-center p-2`}

@@ -1,7 +1,7 @@
 import PixelableImage from "@/shared/components/organisms/PixelableImage";
 import SimpsonsTemplate from "@/shared/components/templates/SimpsonsTemplate";
 import Image from "next/image";
-import { ToonProvider } from "@/shared/hooks/ToonProvider";
+import { ToonProvider } from "@/shared/hooks/ToonContext";
 
 async function getToons() {
   const res = await fetch("http://localhost:3000/api/simpsons");

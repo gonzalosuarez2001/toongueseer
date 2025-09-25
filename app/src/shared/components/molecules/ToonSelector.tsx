@@ -2,7 +2,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import type { Toon } from "../../types";
-import { useToon } from "@/shared/hooks/ToonProvider";
+import { useToon } from "@/shared/hooks/ToonContext";
+import confetti from "canvas-confetti";
 
 export default function ToonSelector() {
   const { addTriedToon, addCounter, dailyToon, cartoon, toons, setSolved } =
@@ -17,20 +18,50 @@ export default function ToonSelector() {
 
   const isOpen: boolean = value.trim() !== "" && isFocused;
 
+
+  const shootConfetti = () => {
+    confetti({
+      particleCount: 200,
+      angle: 60,
+      spread: 150,
+      origin: { x: 0, y: 1 },
+    });
+    confetti({
+      particleCount: 200,
+      angle: 120,
+      spread: 150,
+      origin: { x: 1, y: 1 },
+    });
+    confetti({
+      particleCount: 200,
+      angle: -60,
+      spread: 150,
+      origin: { x: 0, y: -0.25 },
+    });
+    confetti({
+      particleCount: 200,
+      angle: 240,
+      spread: 150,
+      origin: { x: 1, y: -0.25 },
+    });
+  };
+
   const handleSelect = async (id: number) => {
     if (id === dailyToon) {
+      shootConfetti();
       localStorage.setItem(`${cartoon}_solved`, "true");
       setSolved(true);
-      return;
+    } else {
+      addTriedToon(id);
+      addCounter();
     }
-
-    addTriedToon(id);
-    addCounter();
 
     setIsFocused(false);
     if (inputRef.current) {
       setValue("");
-      inputRef.current.focus();
+      if (!(id === dailyToon)) {
+        inputRef.current.focus();
+      }
     }
   };
 
@@ -75,14 +106,14 @@ export default function ToonSelector() {
   }, []);
 
   return (
-    <div className="relative bg-white/80 border-4 border-simpsons rounded-lg mt-5">
+    <div className="relative bg-white/80 border-4 border-simpsons rounded-lg mt-5 z-10">
       <input
         ref={inputRef}
         value={value}
         onChange={(e) => setValue(e.target.value)}
         onFocus={() => setIsFocused(true)}
         type="text"
-        placeholder="Buscar..."
+        placeholder="Search..."
         className="w-full border border-none outline-none p-4 "
       />
       {isOpen && (

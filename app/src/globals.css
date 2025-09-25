@@ -1,13 +1,15 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
-@import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Boogaloo&family=Chewy&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Boogaloo&family=Chewy&display=swap");
 
 @import "tailwindcss";
 
 @theme inline {
   --font-lucky: "Boogaloo";
   --color-simpsons: #ffe205;
-  --animate-flash-red: flashRed 1s ease-in-out;
+  --animate-flash-red: flashRed .5s ease-in-out;
+  --animate-scale: scale .5s ease-in-out;
+  --animate-mistake: mistake .5s ease-in-out;
 }
 
 @utility bg-toon-simpsons {
@@ -20,6 +22,10 @@
 
 @utility animate-flash-red {
   animation: var(--animate-flash-red);
+}
+
+@utility animate-scale {
+  animation: var(--animate-scale);
 }
 
 @utility scrollbar-hidden {
@@ -49,7 +55,7 @@
 
   &::-webkit-scrollbar-thumb {
     background-color: var(--color-simpsons);
-    border-radius: 8px
+    border-radius: 8px;
   }
 }
 
@@ -58,11 +64,32 @@
     background-color: auto;
   }
   50% {
-    background-color:rgba(255, 99, 102, 0.7);
+    background-color: rgba(255, 99, 102, 0.7);
   }
   100% {
     background-color: auto;
   }
+}
+
+@keyframes scale {
+  0% {
+    scale: 1;
+  }
+  50% {
+    scale: 1.04;
+  }
+  100% {
+    scale: 1;
+  }
+}
+
+@keyframes mistake {
+  0% { transform: translateX(0); }
+  20% { transform: translateX(-5px); }
+  40% { transform: translateX(5px); }
+  60% { transform: translateX(-5px); }
+  80% { transform: translateX(5px); }
+  100% { transform: translateX(0); }
 }
 
 body {

@@ -3,7 +3,7 @@ import PixelableImage from "@/shared/components/organisms/PixelableImage";
 import Image from "next/image";
 import type { Toon } from "../../types";
 import { useEffect } from "react";
-import { useToon } from "@/shared/hooks/ToonProvider";
+import { useToon } from "@/shared/hooks/ToonContext";
 import ToonHeader from "../organisms/ToonHeader";
 import ToonImage from "../organisms/ToonImage";
 import ToonFooter from "../organisms/ToonFooter";
@@ -43,9 +43,9 @@ export default function SimpsonsTemplate({
       <div>
         <ToonHeader />
         <ToonImage />
+        <ToonCongrats />
         <ToonSelector />
         <ToonTracker />
-        <ToonCongrats />
         <ToonFooter />
       </div>
     </div>
