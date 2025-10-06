@@ -1,15 +1,15 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Boogaloo&family=Chewy&display=swap");
 
 @import "tailwindcss";
 
 @theme inline {
-  --font-lucky: "Boogaloo";
+  --font-simpsons: "Boogaloo";
+  --font-montserrat: "Montserrat";
   --color-simpsons: #ffe205;
-  --animate-flash-red: flashRed .5s ease-in-out;
-  --animate-scale: scale .5s ease-in-out;
-  --animate-mistake: mistake .5s ease-in-out;
+  --animate-flash-red: flashRed 0.5s ease-in-out;
+  --animate-scale: scale 0.5s ease-in-out;
+  --animate-mistake: mistake 0.5s ease-in-out;
 }
 
 @utility bg-toon-simpsons {
@@ -84,16 +84,27 @@
 }
 
 @keyframes mistake {
-  0% { transform: translateX(0); }
-  20% { transform: translateX(-5px); }
-  40% { transform: translateX(5px); }
-  60% { transform: translateX(-5px); }
-  80% { transform: translateX(5px); }
-  100% { transform: translateX(0); }
+  0% {
+    transform: translateX(0);
+  }
+  20% {
+    transform: translateX(-5px);
+  }
+  40% {
+    transform: translateX(5px);
+  }
+  60% {
+    transform: translateX(-5px);
+  }
+  80% {
+    transform: translateX(5px);
+  }
+  100% {
+    transform: translateX(0);
+  }
 }
 
 body {
-  font-family: var(--font-lucky);
   box-sizing: border-box;
   overflow-x: hidden;
 }

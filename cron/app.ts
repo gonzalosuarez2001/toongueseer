@@ -81,12 +81,23 @@ function getRandomInt(max: number): number {
   return randomInt(1, max + 1);
 }
 
+async function revalidateToons() {
+  try {
+    const res = await fetch(`${process.env.API_URL}/api/revalidate`);
+    const data = await res.json();
+    console.log("Revalidation Response:", data);
+  } catch (error) {
+    console.error("Error during revalidation:", error);
+  }
+}
+
 // Cron
 cron.schedule(
   "0 0 * * *",
   () => {
     console.log("\nExecuting Toon Guesser Cron\n");
     getDailyToons();
+    revalidateToons();
   },
   {
     timezone: "UTC",

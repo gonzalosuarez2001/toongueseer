@@ -8,35 +8,47 @@ type Toon = {
   image_url: string;
 };
 
-const prisma = new PrismaClient();
-
-const filePath = path.join(process.cwd(), "./data/simpsons.json");
-const rawData = fs.readFileSync(filePath, "utf-8");
-const simpsonsData: Toon[] = JSON.parse(rawData);
-
-const cartoons = [
-  { id: 1, name: "Simpsons" },
-  //{ id: 2, name: "Looney" },
-];
-
-const toons: Record<string, Toon[]> = {
-  Simpsons: simpsonsData,
-  Looney: [],
+type Cartoon = {
+  id: number;
+  name: string;
 };
 
+const cartoonList = ["simpsons"];
+
+const prisma = new PrismaClient();
+
+const dataDir = path.join(process.cwd(), "data");
+const toons: Record<string, Toon[]> = {};
+
+const files: string[] = fs.readdirSync(dataDir);
+
+files.forEach((file) => {
+  if (file.endsWith(".json")) {
+    const filePath = path.join(dataDir, file);
+    const rawData = fs.readFileSync(filePath, "utf-8");
+    const jsonData: Toon[] = JSON.parse(rawData);
+
+    const name = path.parse(file).name;
+    toons[name] = jsonData;
+  }
+});
+
 async function insertCartoons() {
+  const cartoons: Cartoon[] = [];
   await Promise.all(
-    cartoons.map(async (cartoon) => {
-      await prisma.cartoon.create({
-        data: cartoon,
+    cartoonList.map(async (cartoon) => {
+      const res = await prisma.cartoon.create({
+        data: { name: cartoon },
       });
+      cartoons.push(res);
     })
   );
+  return cartoons;
 }
 
-async function insertStats() {
+async function insertStats(cartoons: Cartoon[]) {
   await Promise.all(
-    cartoons.map(async (cartoon) => {
+    cartoons.map(async (cartoon: Cartoon) => {
       await prisma.stats.create({
         data: {
           cartoon_id: cartoon.id,
@@ -46,9 +58,9 @@ async function insertStats() {
   );
 }
 
-async function insertToons() {
+async function insertToons(cartoons: Cartoon[]) {
   await Promise.all(
-    cartoons.map(async (cartoon) => {
+    cartoons.map(async (cartoon: Cartoon) => {
       await Promise.all(
         toons[cartoon.name].map(async (toon) => {
           await prisma.toon.create({
@@ -61,9 +73,9 @@ async function insertToons() {
 }
 
 async function main() {
-  await insertCartoons();
-  await insertStats();
-  await insertToons();
+  const cartoons = await insertCartoons();
+  await insertStats(cartoons);
+  await insertToons(cartoons);
 }
 
 main()

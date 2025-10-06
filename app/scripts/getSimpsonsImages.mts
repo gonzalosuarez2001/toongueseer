@@ -1,4 +1,3 @@
-import type { SimpsonApiToon } from "../src/features/simpsons/types";
 import fs from "fs";
 import path from "path";
 
@@ -14,23 +13,25 @@ async function main() {
       const data = await res.json();
 
       await Promise.all(
-        data.results.map(async (toon: SimpsonApiToon) => {
-          const imageUrl = apiImageUrl + toon.portrait_path;
-          const res = await fetch(imageUrl);
+        data.results.map(
+          async (toon: { id: number; name: string; portrait_path: string }) => {
+            const imageUrl = apiImageUrl + toon.portrait_path;
+            const res = await fetch(imageUrl);
 
-          if (!res.ok) throw new Error("Error al obtener la imagen");
+            if (!res.ok) throw new Error("Error al obtener la imagen");
 
-          const arrayBuffer = await res.arrayBuffer();
-          const buffer = Buffer.from(arrayBuffer);
+            const arrayBuffer = await res.arrayBuffer();
+            const buffer = Buffer.from(arrayBuffer);
 
-          const savePath = path.join(
-            process.cwd(),
-            "public/simpsons_toons",
-            `${toon.id}.webp`
-          );
+            const savePath = path.join(
+              process.cwd(),
+              "public/simpsons_toons",
+              `${toon.id}.webp`
+            );
 
-          fs.writeFileSync(savePath, buffer);
-        })
+            fs.writeFileSync(savePath, buffer);
+          }
+        )
       );
     })
   );

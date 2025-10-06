@@ -1,27 +1,19 @@
-import PixelableImage from "@/shared/components/organisms/PixelableImage";
-import SimpsonsTemplate from "@/shared/components/templates/SimpsonsTemplate";
-import Image from "next/image";
-import { ToonProvider } from "@/shared/hooks/ToonContext";
+export const revalidate = 86400;
 
-async function getToons() {
-  const res = await fetch("http://localhost:3000/api/simpsons");
-  const data = await res.json();
-  return data;
-}
+import ToonTemplate from "@/components/templates/ToonTemplate";
+import { ToonProvider } from "@/hooks/ToonContext";
+import { getToons, getDailyToon } from "@/lib/repository";
+import type { Toon } from "@prisma/client";
 
-async function getDailyToon() {
-  const res = await fetch("http://localhost:3000/api/simpsons/daily");
-  const data = await res.json();
-  return data;
-}
+const cartoon = "simpsons";
 
 export default async function Simpsons() {
-  const toons = await getToons();
-  const dailyToon = await getDailyToon();
+  const toons: Toon[] = await getToons(cartoon);
+  const dailyToon: number = await getDailyToon(cartoon);
 
   return (
     <ToonProvider>
-      <SimpsonsTemplate toons={toons} dailyToon={dailyToon} />
+      <ToonTemplate toons={toons} dailyToon={dailyToon} cartoon={cartoon} />
     </ToonProvider>
   );
 }

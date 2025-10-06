@@ -1,5 +1,4 @@
-import type { Toon } from "../src/shared/types";
-import type { SimpsonApiToon } from "../src/features/simpsons/types";
+import type { Toon } from "../src/types";
 import fs from "fs";
 import path from "path";
 
@@ -16,7 +15,7 @@ async function main() {
       const data = await res.json();
 
       await Promise.all(
-        data.results.map(async (toon: SimpsonApiToon) => {
+        data.results.map(async (toon: { id: number; name: string }) => {
           toons.push({
             id: toon.id,
             name: toon.name,
@@ -43,7 +42,7 @@ async function main() {
     filePath = path.join(dir, fileName);
     counter++;
   }
-  
+
   fs.writeFileSync(filePath, jsonContent);
 
   console.log("Archivo creado en", filePath);
