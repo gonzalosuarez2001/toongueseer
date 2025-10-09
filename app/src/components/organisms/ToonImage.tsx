@@ -6,13 +6,14 @@ export default function ToonImage() {
   const divRef = useRef<HTMLDivElement>(null);
 
   const {
-    dailyToon,
+    dailyToonImage,
     solved,
     counter,
     rotation,
     pixelDificulty,
     saturationDificulty,
     borderStyle,
+    cartoon,
   } = useToon();
 
   const [hasMounted, setHasMounted] = useState<boolean>(false);
@@ -30,7 +31,7 @@ export default function ToonImage() {
     void element.offsetWidth;
     element.classList.add("animate-mistake");
   };
-
+  
   useEffect(() => {
     if (hasMounted) {
       triggerMistakeAnimation();
@@ -48,7 +49,7 @@ export default function ToonImage() {
       } bg-white/80 border-4 ${borderStyle} p-4 rounded-lg mt-5 flex justify-center items-center flex-col`}
     >
       <PixelableImage
-        src={`/simpsons_toons/${dailyToon}.webp`}
+        src={`/${cartoon}_toons${dailyToonImage}`}
         width={300}
         height={300}
         pixelDificulty={formatPixelDificulty}

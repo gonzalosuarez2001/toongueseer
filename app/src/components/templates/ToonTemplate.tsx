@@ -19,12 +19,16 @@ export default function ToonTemplate({
 }: {
   cartoon: Cartoon;
   toons: Toon[];
-  dailyToon: number;
+  dailyToon: Toon;
 }) {
   const { loadContext, loading } = useToon();
 
   useEffect(() => {
-    loadContext(cartoon, toons, dailyToon);
+    loadContext(
+      cartoon,
+      toons,
+      dailyToon,
+    );
   }, []);
 
   let containerStyles = "";

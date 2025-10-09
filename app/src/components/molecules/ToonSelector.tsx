@@ -10,7 +10,7 @@ export default function ToonSelector() {
   const {
     addTriedToon,
     addCounter,
-    dailyToon,
+    dailyToonId,
     cartoon,
     toons,
     setSolved,
@@ -56,7 +56,7 @@ export default function ToonSelector() {
   };
 
   const handleSelect = async (id: number) => {
-    if (id === dailyToon) {
+    if (id === dailyToonId) {
       shootConfetti();
       localStorage.setItem(`${cartoon}_solved`, "true");
       setSolved(true);
@@ -68,7 +68,7 @@ export default function ToonSelector() {
     setIsFocused(false);
     if (inputRef.current) {
       setValue("");
-      if (!(id === dailyToon)) {
+      if (!(id === dailyToonId)) {
         inputRef.current.focus();
       }
     }
@@ -117,7 +117,9 @@ export default function ToonSelector() {
   return (
     <>
       {!solved && (
-        <div className={`relative bg-white/80 border-4 ${borderStyle} rounded-lg mt-5 z-10`}>
+        <div
+          className={`relative bg-white/80 border-4 ${borderStyle} rounded-lg mt-5 z-10`}
+        >
           <input
             ref={inputRef}
             value={value}
@@ -132,7 +134,8 @@ export default function ToonSelector() {
               ref={containerRef}
               className={`absolute w-full flex flex-col left-0 top-16 bg-white max-h-56 overflow-y-scroll ${scrollStyle} rounded-lg`}
             >
-              {filteredToons.map((toon) => {
+              {filteredToons.map((toon, index) => {
+                if (index > 19) return null;
                 return (
                   <button
                     onClick={() => handleSelect(toon.id)}
@@ -140,18 +143,22 @@ export default function ToonSelector() {
                     className="flex items-center p-2 hover:bg-gray-100/80 transition-colors cursor-pointer"
                   >
                     <Image
-                      src={"/simpsons_toons" + toon.image_url}
-                      alt="Simpsons Character"
+                      src={`/${cartoon}_toons` + toon.image_url}
+                      alt="Character"
                       width={60}
                       height={60}
                       className="border-2 border-gray-700 rounded-lg p-1 bg-white"
                     />
-                    <Text type="md" className="ms-4">{toon.name}</Text>
+                    <Text type="md" className="ms-4">
+                      {toon.name}
+                    </Text>
                   </button>
                 );
               })}
               {filteredToons.length === 0 && (
-                <Text type="md" className="p-4">No se encontraron resultados</Text>
+                <Text type="md" className="p-4">
+                  No se encontraron resultados
+                </Text>
               )}
             </div>
           )}

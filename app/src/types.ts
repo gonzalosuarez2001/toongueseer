@@ -11,4 +11,4 @@ export type Stats = {
   daily_toon: number;
 };
 
-export type Cartoon = "simpsons" | "";
+export type Cartoon = "simpsons" | "pokemon" | "";

@@ -1,301 +1,241 @@
 [
   {
-    "id": 1,
-    "name": "Homer Simpson",
-    "image_url": "/1.webp"
-  },
-  {
-    "id": 2,
-    "name": "Marge Simpson",
-    "image_url": "/2.webp"
-  },
-  {
-    "id": 3,
-    "name": "Bart Simpson",
-    "image_url": "/3.webp"
-  },
-  {
-    "id": 4,
-    "name": "Lisa Simpson",
-    "image_url": "/4.webp"
-  },
-  {
-    "id": 5,
-    "name": "Maggie Simpson",
-    "image_url": "/5.webp"
-  },
-  {
-    "id": 6,
-    "name": "Abe Simpson II",
-    "image_url": "/6.webp"
-  },
-  {
-    "id": 7,
-    "name": "Patty Bouvier",
-    "image_url": "/7.webp"
-  },
-  {
-    "id": 8,
-    "name": "Selma Bouvier",
-    "image_url": "/8.webp"
-  },
-  {
-    "id": 9,
-    "name": "Ned Flanders",
-    "image_url": "/9.webp"
-  },
-  {
-    "id": 10,
-    "name": "Maude Flanders",
-    "image_url": "/10.webp"
-  },
-  {
-    "id": 11,
-    "name": "Rod Flanders",
-    "image_url": "/11.webp"
-  },
-  {
-    "id": 12,
-    "name": "Todd Flanders",
-    "image_url": "/12.webp"
-  },
-  {
-    "id": 13,
-    "name": "Charles Montgomery Burns",
-    "image_url": "/13.webp"
-  },
-  {
-    "id": 14,
-    "name": "Waylon Smithers, Jr.",
-    "image_url": "/14.webp"
-  },
-  {
-    "id": 15,
-    "name": "Krusty the Clown",
-    "image_url": "/15.webp"
-  },
-  {
-    "id": 16,
-    "name": "Moe Szyslak",
-    "image_url": "/16.webp"
-  },
-  {
-    "id": 17,
-    "name": "Apu Nahasapeemapetilon",
-    "image_url": "/17.webp"
-  },
-  {
-    "id": 18,
-    "name": "Seymour Skinner",
-    "image_url": "/18.webp"
-  },
-  {
-    "id": 19,
-    "name": "Gary Chalmers",
-    "image_url": "/19.webp"
-  },
-  {
-    "id": 20,
-    "name": "Edna Krabappel",
-    "image_url": "/20.webp"
-  },
-  {
-    "id": 21,
     "name": "Otto Mann",
     "image_url": "/21.webp"
   },
   {
-    "id": 22,
     "name": "Milhouse Van Houten",
     "image_url": "/22.webp"
   },
   {
-    "id": 23,
     "name": "Luann Van Houten",
     "image_url": "/23.webp"
   },
   {
-    "id": 24,
     "name": "Kirk Van Houten",
     "image_url": "/24.webp"
   },
   {
-    "id": 25,
     "name": "Ralph Wiggum",
     "image_url": "/25.webp"
   },
   {
-    "id": 26,
     "name": "Barney Gumble",
     "image_url": "/26.webp"
   },
   {
-    "id": 27,
     "name": "Carl Carlson",
     "image_url": "/27.webp"
   },
   {
-    "id": 28,
     "name": "Lenny Leonard",
     "image_url": "/28.webp"
   },
   {
-    "id": 29,
     "name": "Clancy Wiggum",
     "image_url": "/29.webp"
   },
   {
-    "id": 30,
     "name": "Sarah Wiggum",
     "image_url": "/30.webp"
   },
   {
-    "id": 31,
     "name": "Julius Hibbert",
     "image_url": "/31.webp"
   },
   {
-    "id": 32,
     "name": "Lou",
     "image_url": "/32.webp"
   },
   {
-    "id": 33,
     "name": "Jonathan Frink, Jr.",
     "image_url": "/33.webp"
   },
   {
-    "id": 34,
     "name": "Professor Frink's son",
     "image_url": "/34.webp"
   },
   {
-    "id": 35,
     "name": "Robert Terwilliger",
     "image_url": "/35.webp"
   },
   {
-    "id": 36,
     "name": "Martin Prince, Jr.",
     "image_url": "/36.webp"
   },
   {
-    "id": 37,
     "name": "Nelson Muntz",
     "image_url": "/37.webp"
   },
   {
-    "id": 38,
     "name": "Jimbo Jones",
     "image_url": "/38.webp"
   },
   {
-    "id": 39,
     "name": "Kearney Zzyzwicz",
     "image_url": "/39.webp"
   },
   {
-    "id": 40,
     "name": "Dolph Starbeam",
     "image_url": "/40.webp"
   },
   {
-    "id": 41,
+    "name": "Homer Simpson",
+    "image_url": "/1.webp"
+  },
+  {
+    "name": "Marge Simpson",
+    "image_url": "/2.webp"
+  },
+  {
+    "name": "Bart Simpson",
+    "image_url": "/3.webp"
+  },
+  {
+    "name": "Lisa Simpson",
+    "image_url": "/4.webp"
+  },
+  {
+    "name": "Maggie Simpson",
+    "image_url": "/5.webp"
+  },
+  {
+    "name": "Abe Simpson II",
+    "image_url": "/6.webp"
+  },
+  {
+    "name": "Patty Bouvier",
+    "image_url": "/7.webp"
+  },
+  {
+    "name": "Selma Bouvier",
+    "image_url": "/8.webp"
+  },
+  {
+    "name": "Ned Flanders",
+    "image_url": "/9.webp"
+  },
+  {
+    "name": "Maude Flanders",
+    "image_url": "/10.webp"
+  },
+  {
+    "name": "Rod Flanders",
+    "image_url": "/11.webp"
+  },
+  {
+    "name": "Todd Flanders",
+    "image_url": "/12.webp"
+  },
+  {
+    "name": "Charles Montgomery Burns",
+    "image_url": "/13.webp"
+  },
+  {
+    "name": "Waylon Smithers, Jr.",
+    "image_url": "/14.webp"
+  },
+  {
+    "name": "Krusty the Clown",
+    "image_url": "/15.webp"
+  },
+  {
+    "name": "Moe Szyslak",
+    "image_url": "/16.webp"
+  },
+  {
+    "name": "Apu Nahasapeemapetilon",
+    "image_url": "/17.webp"
+  },
+  {
+    "name": "Seymour Skinner",
+    "image_url": "/18.webp"
+  },
+  {
+    "name": "Gary Chalmers",
+    "image_url": "/19.webp"
+  },
+  {
+    "name": "Edna Krabappel",
+    "image_url": "/20.webp"
+  },
+  {
     "name": "Stu Discothèque",
     "image_url": "/41.webp"
   },
   {
-    "id": 42,
     "name": "Joe Quimby",
     "image_url": "/42.webp"
   },
   {
-    "id": 43,
     "name": "Fat Tony",
     "image_url": "/43.webp"
   },
   {
-    "id": 44,
     "name": "Louie (mafia)",
     "image_url": "/44.webp"
   },
   {
-    "id": 45,
     "name": "Melvin Van Horne",
     "image_url": "/45.webp"
   },
   {
-    "id": 46,
     "name": "Comic Book Guy",
     "image_url": "/46.webp"
   },
   {
-    "id": 47,
     "name": "Kent Brockman",
     "image_url": "/47.webp"
   },
   {
-    "id": 48,
     "name": "Groundskeeper Willie",
     "image_url": "/48.webp"
   },
   {
-    "id": 49,
     "name": "Cletus Spuckler",
     "image_url": "/49.webp"
   },
   {
-    "id": 50,
     "name": "Brandine Spuckler",
     "image_url": "/50.webp"
   },
   {
-    "id": 51,
     "name": "Dr. Nick",
     "image_url": "/51.webp"
   },
   {
-    "id": 52,
     "name": "Elizabeth Hoover",
     "image_url": "/52.webp"
   },
   {
-    "id": 53,
     "name": "Mona Simpson",
     "image_url": "/53.webp"
   },
   {
-    "id": 54,
     "name": "Troy McClure",
     "image_url": "/54.webp"
   },
   {
-    "id": 55,
     "name": "Timothy Lovejoy Jr.",
     "image_url": "/55.webp"
   },
   {
-    "id": 56,
     "name": "Helen Lovejoy",
     "image_url": "/56.webp"
   },
   {
-    "id": 57,
     "name": "Jessica Lovejoy",
     "image_url": "/57.webp"
   },
   {
-    "id": 58,
     "name": "Snake Jailbird",
     "image_url": "/58.webp"
   },
   {
-    "id": 59,
     "name": "Eddie",
     "image_url": "/59.webp"
   },
   {
-    "id": 60,
     "name": "Kodos",
     "image_url": "/60.webp"
   }

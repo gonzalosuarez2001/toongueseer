@@ -2,9 +2,6 @@
 import { useToon } from "@/hooks/ToonContext";
 import { useRef, useEffect, useState } from "react";
 
-const saturationLevels = [0, 0.75, 0.8, 0.84, 0.88, 0.92, 0.96, 1];
-const pixelationLevels = [1, 15, 20, 25, 30, 35, 40, 45, 50, 55];
-
 export default function PixelableImage({
   src,
   width,
@@ -22,7 +19,7 @@ export default function PixelableImage({
 }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
-  const { rotationAngle } = useToon();
+  const { rotationAngle, pixelationLevels, saturationLevels } = useToon();
 
   const pixelation = pixelationLevels[pixelDificulty];
   const saturation = saturationLevels[saturationDificulty];
@@ -92,14 +89,7 @@ export default function PixelableImage({
       // Restaurar
       ctx.restore();
     };
-  }, [
-    src,
-    width,
-    height,
-    pixelDificulty,
-    saturationDificulty,
-    enableRotation,
-  ]);
+  }, [src, width, height, pixelDificulty, saturationDificulty, enableRotation]);
 
   return (
     <div>

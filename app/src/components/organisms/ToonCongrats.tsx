@@ -24,7 +24,7 @@ export default function ToonCongrats() {
       {solved && (
         <div className={`bg-white/80 border-4 ${borderStyle} rounded-lg mt-5 p-4 flex flex-col items-center`}>
           <Text type="xl" className="mb-2">Congratulations!</Text>
-          <div className="flex flex-col items-center mt-2 mb-2">
+          <div className="flex flex-col items-center mb-2">
             <Text type="sm">Next toon in:</Text>
             <Countdown
               date={nextUTC}

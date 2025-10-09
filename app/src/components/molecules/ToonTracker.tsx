@@ -6,7 +6,7 @@ import { useToon } from "@/hooks/ToonContext";
 import Text from "./Text";
 
 export default function ToonTracker() {
-  const { triedToons, solved, borderStyle, bgStyle } = useToon();
+  const { triedToons, solved, cartoon, bgStyle } = useToon();
 
   return (
     <div className="flex flex-col gap-2 mt-5">
@@ -24,8 +24,8 @@ export default function ToonTracker() {
               } flex items-center p-3 rounded-md`}
             >
               <Image
-                src={"/simpsons_toons" + toon.image_url}
-                alt="Simpsons Character"
+                src={`/${cartoon}_toons` + toon.image_url}
+                alt="Character"
                 width={60}
                 height={60}
                 className="border-2 border-gray-700 rounded-lg p-1 bg-white"

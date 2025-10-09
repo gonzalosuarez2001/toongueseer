@@ -7,7 +7,8 @@ import cartoonConfig from "../cartoonConfig";
 type ToonContextType = {
   cartoon: Cartoon;
   toons: Toon[];
-  dailyToon: number;
+  dailyToonId: number;
+  dailyToonImage: string;
   solved: boolean;
   triedToons: Toon[];
   counter: number;
@@ -18,14 +19,17 @@ type ToonContextType = {
   saturationDificulty: number;
   rotationAngle: number;
   bgStyle: string;
+  textStyle: string;
   borderStyle: string;
   scrollStyle: string;
   loading: boolean;
   switchDepixelation: () => void;
   switchRotation: () => void;
   switchDesaturation: () => void;
+  pixelationLevels: number[];
+  saturationLevels: number[];
   setToons: React.Dispatch<React.SetStateAction<Toon[]>>;
-  setDailyToon: React.Dispatch<React.SetStateAction<number>>;
+  setDailyToonId: React.Dispatch<React.SetStateAction<number>>;
   setCartoon: React.Dispatch<React.SetStateAction<Cartoon>>;
   setSolved: React.Dispatch<React.SetStateAction<boolean>>;
   setCounter: React.Dispatch<React.SetStateAction<number>>;
@@ -36,7 +40,7 @@ type ToonContextType = {
   setSaturationDificulty: React.Dispatch<React.SetStateAction<number>>;
   addTriedToon: (id: number) => void;
   addCounter: () => void;
-  loadContext: (cartoon: Cartoon, toons: Toon[], dailyToon: number) => void;
+  loadContext: (cartoon: Cartoon, toons: Toon[], dailyToon: Toon) => void;
 };
 
 const ToonContext = createContext<ToonContextType | undefined>(undefined);
@@ -52,7 +56,8 @@ export const useToon = () => {
 export function ToonProvider({ children }: { children: React.ReactNode }) {
   const [cartoon, setCartoon] = useState<Cartoon>("");
   const [toons, setToons] = useState<Toon[]>([]);
-  const [dailyToon, setDailyToon] = useState<number>(0);
+  const [dailyToonId, setDailyToonId] = useState<number>(0);
+  const [dailyToonImage, setDailyToonImage] = useState<string>("");
   const [triedToons, setTriedToons] = useState<Toon[]>([]);
   const [solved, setSolved] = useState<boolean>(false);
   const [counter, setCounter] = useState<number>(0);
@@ -71,7 +76,11 @@ export function ToonProvider({ children }: { children: React.ReactNode }) {
 
   const [bgStyle, setBgStyle] = useState<string>("");
   const [borderStyle, setBorderStyle] = useState<string>("");
+  const [textStyle, setTextStyle] = useState<string>("");
   const [scrollStyle, setScrollStyle] = useState<string>("");
+
+  const [pixelationLevels, setPixelationLevels] = useState<number[]>([]);
+  const [saturationLevels, setSaturationLevels] = useState<number[]>([]);
 
   const [loading, setLoading] = useState<boolean>(true);
 
@@ -150,24 +159,31 @@ export function ToonProvider({ children }: { children: React.ReactNode }) {
     });
   };
 
-  const loadContext = (cartoon: Cartoon, toons: Toon[], dailyToon: number) => {
-    setCartoon("simpsons");
+  const loadContext = (cartoon: Cartoon, toons: Toon[], dailyToon: Toon) => {
+    setCartoon(cartoon);
     setToons(toons);
-    setDailyToon(dailyToon);
+
+    if (cartoon != "") {
+      setPixelationLevels(cartoonConfig[cartoon].pixelationLevels);
+      setSaturationLevels(cartoonConfig[cartoon].saturationLevels);
+    }
+
+    setDailyToonId(dailyToon.id);
+    setDailyToonImage(dailyToon.image_url);
     loadStyles(cartoon);
 
     const daily = localStorage.getItem(`${cartoon}_daily_toon`);
-    if (daily && daily == dailyToon.toString()) {
+    if (daily && daily == dailyToon.id.toString()) {
       loadGame(cartoon, toons);
     } else {
-      createGame(cartoon, dailyToon);
+      createGame(cartoon, dailyToon.id);
     }
 
     setLoading(false);
   };
 
-  const createGame = (cartoon: string, dailyToon: number) => {
-    localStorage.setItem(`${cartoon}_daily_toon`, dailyToon.toString());
+  const createGame = (cartoon: string, dailyToonId: number) => {
+    localStorage.setItem(`${cartoon}_daily_toon`, dailyToonId.toString());
     localStorage.setItem(`${cartoon}_answers`, "[]");
     localStorage.setItem(`${cartoon}_solved`, "false");
     localStorage.setItem(`${cartoon}_counter`, "0");
@@ -209,8 +225,10 @@ export function ToonProvider({ children }: { children: React.ReactNode }) {
     if (cartoon != "") {
       const bg = cartoonConfig[cartoon].background;
       const border = cartoonConfig[cartoon].border;
+      const text = cartoonConfig[cartoon].text;
       const scroll = cartoonConfig[cartoon].scroll;
       setBgStyle(bg);
+      setTextStyle(text);
       setBorderStyle(border);
       setScrollStyle(scroll);
     }
@@ -321,6 +339,8 @@ export function ToonProvider({ children }: { children: React.ReactNode }) {
   return (
     <ToonContext.Provider
       value={{
+        pixelationLevels,
+        saturationLevels,
         rotationAngle,
         counter,
         cartoon,
@@ -329,11 +349,13 @@ export function ToonProvider({ children }: { children: React.ReactNode }) {
         solved,
         toons,
         triedToons,
-        dailyToon,
+        dailyToonId,
+        dailyToonImage,
         rotation,
         depixelation,
         desaturation,
         bgStyle,
+        textStyle,
         borderStyle,
         scrollStyle,
         loading,
@@ -349,7 +371,7 @@ export function ToonProvider({ children }: { children: React.ReactNode }) {
         setCounter,
         setCartoon,
         setSolved,
-        setDailyToon,
+        setDailyToonId,
         addTriedToon,
         addCounter,
         loadContext,

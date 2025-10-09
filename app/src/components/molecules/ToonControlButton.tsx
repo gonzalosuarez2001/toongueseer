@@ -19,24 +19,24 @@ export default function ToonControlButton({
 }) {
   const maxDifficulty = Number(process.env.NEXT_PUBLIC_MAX_DIFFICULTY) || 7;
 
-  const { bgStyle, borderStyle } = useToon();
+  const { bgStyle, textStyle } = useToon();
 
   return (
     <div className="flex flex-col items-center space-y-1">
       <button
         onClick={onClick}
         className={`${
-          active ? "bg-black/30" : " hover:bg-black/10"
+          active ? "bg-black/20" : " hover:bg-black/10"
         }  rounded-full   p-3 cursor-pointer transition-colors`}
       >
         <Icon
-          className={`${active ? "text-simpsons" : "text-gray-700"} size-8`}
+          className={`${active ? textStyle : "text-gray-700"} size-8`}
         />
       </button>
       <Text type="md">{title}</Text>
 
       {levels && (
-        <div className="flex space-x-1 bg-black/30 p-1 rounded-full mt-1">
+        <div className="flex space-x-1 bg-black/20 p-1 rounded-full mt-1">
           {Array.from({ length: maxDifficulty }).map((_, index) => {
             return (
               <div

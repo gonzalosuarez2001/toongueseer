@@ -2,15 +2,18 @@
   "name": "toonguesser",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
     "migrate": "npx prisma migrate dev",
-    "seed": "ts-node prisma/seed.ts",
-    "get-simpsons-toons": "node --loader ts-node/esm scripts/getSimpsonsCharacters.mts",
-    "get-simpsons-images": "node --loader ts-node/esm scripts/getSimpsonsImages.mts"
+    "seed": "node prisma/seed.js",
+    "get-simpsons-toons": "node scripts/getSimpsonsCharacters.js",
+    "get-simpsons-images": "node scripts/getSimpsonsImages.js",
+    "get-pokemon-toons": "node scripts/getPokemonCharacters.js",
+    "get-pokemon-images": "node scripts/getPokemonImages.js"
   },
   "dependencies": {
     "@prisma/client": "^6.16.2",
@@ -19,7 +22,8 @@
     "next": "15.5.2",
     "react": "19.1.0",
     "react-countdown": "^2.3.6",
-    "react-dom": "19.1.0"
+    "react-dom": "19.1.0",
+    "sharp": "^0.34.4"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
