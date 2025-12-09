@@ -118,7 +118,7 @@ export default function ToonSelector() {
     <>
       {!solved && (
         <div
-          className={`relative bg-white/80 border-4 ${borderStyle} rounded-lg mt-5 z-10`}
+          className={`relative bg-gray-200/90 border-4 ${borderStyle} rounded-lg mt-5 z-10`}
         >
           <input
             ref={inputRef}
@@ -140,7 +140,7 @@ export default function ToonSelector() {
                   <button
                     onClick={() => handleSelect(toon.id)}
                     key={toon.id}
-                    className="flex items-center p-2 hover:bg-gray-100/80 transition-colors cursor-pointer"
+                    className="flex items-center p-2 hover:bg-gray-200/90 transition-colors cursor-pointer"
                   >
                     <Image
                       src={`/${cartoon}_toons` + toon.image_url}

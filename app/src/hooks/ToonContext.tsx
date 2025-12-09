@@ -1,8 +1,10 @@
 "use client";
 
 import React, { useState, useContext, createContext, useEffect } from "react";
-import type { Toon, Cartoon } from "../types";
+import type { Toon } from "../types";
 import cartoonConfig from "../cartoonConfig";
+
+type Cartoon = keyof typeof cartoonConfig;
 
 type ToonContextType = {
   cartoon: Cartoon;
@@ -54,7 +56,7 @@ export const useToon = () => {
 };
 
 export function ToonProvider({ children }: { children: React.ReactNode }) {
-  const [cartoon, setCartoon] = useState<Cartoon>("");
+  const [cartoon, setCartoon] = useState<Cartoon>("simpsons");
   const [toons, setToons] = useState<Toon[]>([]);
   const [dailyToonId, setDailyToonId] = useState<number>(0);
   const [dailyToonImage, setDailyToonImage] = useState<string>("");
@@ -163,10 +165,8 @@ export function ToonProvider({ children }: { children: React.ReactNode }) {
     setCartoon(cartoon);
     setToons(toons);
 
-    if (cartoon != "") {
-      setPixelationLevels(cartoonConfig[cartoon].pixelationLevels);
-      setSaturationLevels(cartoonConfig[cartoon].saturationLevels);
-    }
+    setPixelationLevels(cartoonConfig[cartoon].pixelationLevels);
+    setSaturationLevels(cartoonConfig[cartoon].saturationLevels);
 
     setDailyToonId(dailyToon.id);
     setDailyToonImage(dailyToon.image_url);
@@ -182,7 +182,7 @@ export function ToonProvider({ children }: { children: React.ReactNode }) {
     setLoading(false);
   };
 
-  const createGame = (cartoon: string, dailyToonId: number) => {
+  const createGame = (cartoon: Cartoon, dailyToonId: number) => {
     localStorage.setItem(`${cartoon}_daily_toon`, dailyToonId.toString());
     localStorage.setItem(`${cartoon}_answers`, "[]");
     localStorage.setItem(`${cartoon}_solved`, "false");
@@ -199,7 +199,8 @@ export function ToonProvider({ children }: { children: React.ReactNode }) {
     localStorage.setItem(`${cartoon}_rotation`, "true");
     localStorage.setItem(`${cartoon}_desaturation`, "true");
 
-    const rotations = [90, 180, 270];
+    const rotations = cartoonConfig[cartoon].rotationAngles;
+
     const randomRotation =
       rotations[Math.floor(Math.random() * rotations.length)];
 
@@ -211,7 +212,7 @@ export function ToonProvider({ children }: { children: React.ReactNode }) {
     );
   };
 
-  const loadGame = (cartoon: string, toons: Toon[]) => {
+  const loadGame = (cartoon: Cartoon, toons: Toon[]) => {
     setSolved(localStorage.getItem(`${cartoon}_solved`) == "true");
     loadDificulty(cartoon);
     loadSolved(cartoon);
@@ -222,16 +223,14 @@ export function ToonProvider({ children }: { children: React.ReactNode }) {
   };
 
   const loadStyles = (cartoon: Cartoon) => {
-    if (cartoon != "") {
-      const bg = cartoonConfig[cartoon].background;
-      const border = cartoonConfig[cartoon].border;
-      const text = cartoonConfig[cartoon].text;
-      const scroll = cartoonConfig[cartoon].scroll;
-      setBgStyle(bg);
-      setTextStyle(text);
-      setBorderStyle(border);
-      setScrollStyle(scroll);
-    }
+    const bg = cartoonConfig[cartoon].background;
+    const border = cartoonConfig[cartoon].border;
+    const text = cartoonConfig[cartoon].text;
+    const scroll = cartoonConfig[cartoon].scroll;
+    setBgStyle(bg);
+    setTextStyle(text);
+    setBorderStyle(border);
+    setScrollStyle(scroll);
   };
 
   const loadDificulty = (cartoon: string) => {
@@ -261,12 +260,13 @@ export function ToonProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
-  const loadRotation = (cartoon: string) => {
+  const loadRotation = (cartoon: Cartoon) => {
     const rotation = localStorage.getItem(`${cartoon}_rotation_angle`);
     if (rotation) {
       setRotationAngle(Number(rotation));
     } else {
-      const rotations = [90, 180, 270];
+      const rotations = cartoonConfig[cartoon].rotationAngles;
+
       const randomRotation =
         rotations[Math.floor(Math.random() * rotations.length)];
       localStorage.setItem(

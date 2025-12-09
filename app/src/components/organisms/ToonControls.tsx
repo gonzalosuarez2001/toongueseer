@@ -21,7 +21,7 @@ export default function ToonControls() {
     <>
       {!solved && (
         <div
-          className={`bg-white/80 border-4 ${borderStyle} rounded-lg mt-5 p-4 flex justify-around`}
+          className={`bg-gray-200/90 border-4 ${borderStyle} rounded-lg mt-5 p-4 flex justify-around`}
         >
           <ToonControlButton
             title="Depixelation"

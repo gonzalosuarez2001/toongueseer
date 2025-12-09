@@ -16,7 +16,6 @@ async function main() {
       await Promise.all(
         data.results.map(async (toon) => {
           toons.push({
-          //  id: toon.id,
             name: toon.name,
             image_url: `/${toon.id}.webp`,
           });

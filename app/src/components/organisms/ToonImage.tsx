@@ -46,12 +46,10 @@ export default function ToonImage() {
       ref={divRef}
       className={`${
         solved && "animate-scale"
-      } bg-white/80 border-4 ${borderStyle} p-4 rounded-lg mt-5 flex justify-center items-center flex-col`}
+      } bg-gray-200/90 border-4 ${borderStyle} p-4 rounded-lg mt-5 flex justify-center items-center flex-col`}
     >
       <PixelableImage
         src={`/${cartoon}_toons${dailyToonImage}`}
-        width={300}
-        height={300}
         pixelDificulty={formatPixelDificulty}
         saturationDificulty={formatSaturationDificulty}
         enableRotation={formatRotation}

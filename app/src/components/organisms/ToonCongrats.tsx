@@ -22,7 +22,7 @@ export default function ToonCongrats() {
   return (
     <>
       {solved && (
-        <div className={`bg-white/80 border-4 ${borderStyle} rounded-lg mt-5 p-4 flex flex-col items-center`}>
+        <div className={`bg-gray-200/90 border-4 ${borderStyle} rounded-lg mt-5 p-4 flex flex-col items-center`}>
           <Text type="xl" className="mb-2">Congratulations!</Text>
           <div className="flex flex-col items-center mb-2">
             <Text type="sm">Next toon in:</Text>

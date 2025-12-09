@@ -1,7 +1,9 @@
 const cartoonConfig = {
   simpsons: {
+    title: "The Simpsons",
     textStyles: {
-      xl: "text-3xl",
+      xxl: "text-5xl",
+      xl: "text-3xl font-semibold",
       lg: "text-2xl",
       md: "text-xl",
       sm: "text-lg",
@@ -13,12 +15,15 @@ const cartoonConfig = {
     text: "text-simpsons",
     scroll: "scrollbar-simpsons",
     loading: "border-t-simpsons border-r-simpsons",
-    pixelationLevels: [1, 20, 24, 28, 32, 36, 40, 44, 46, 50],
+    pixelationLevels: [1, 11, 15, 19, 23, 27, 31, 35],
     saturationLevels: [0, 0.75, 0.8, 0.84, 0.88, 0.92, 0.96, 1],
+    rotationAngles: [90, 180, 270],
   },
   pokemon: {
+    title: "Pokémon",
     textStyles: {
-      xl: "text-3xl font-semibold",
+      xxl: "text-6xl",
+      xl: "text-3xl",
       lg: "text-2xl",
       md: "text-xl",
       sm: "text-lg",
@@ -30,8 +35,29 @@ const cartoonConfig = {
     text: "text-pokemon",
     scroll: "scrollbar-pokemon",
     loading: "border-t-pokemon border-r-pokemon",
-    pixelationLevels: [1, 15, 19, 22, 25, 28, 31, 34, 37, 40],
+    pixelationLevels: [1, 11, 15, 19, 23, 27, 31, 35],
     saturationLevels: [0, 0.71, 0.75, 0.8, 0.84, 0.88, 0.92, 1],
+    rotationAngles: [90, 180, 270],
+  },
+  dragonball: {
+    title: "Dragon Ball",
+    textStyles: {
+      xxl: "text-5xl",
+      xl: "text-2xl",
+      lg: "text-xl",
+      md: "text-lg",
+      sm: "text-md",
+    },
+    background: "bg-dragonball",
+    backgroundImage: "bg-toon-dragonball",
+    font: "font-dragonball",
+    border: "border-dragonball",
+    text: "text-dragonball",
+    scroll: "scrollbar-dragonball",
+    loading: "border-t-dragonball border-r-dragonball",
+    pixelationLevels: [1, 16, 20, 24, 28, 32, 36, 40],
+    saturationLevels: [0, 0.71, 0.75, 0.8, 0.84, 0.88, 0.92, 1],
+    rotationAngles: [180],
   },
 };
 

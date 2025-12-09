@@ -1,15 +1,18 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Boogaloo&family=Chewy&display=swap");
-@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=VT323&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Bangers&family=VT323&display=swap");
 
 @import "tailwindcss";
 
 @theme inline {
   --font-simpsons: "Boogaloo";
   --font-pokemon: "VT323";
+  --font-dragonball: "Bangers";
   --font-montserrat: "Montserrat";
   --color-simpsons: #ffe205;
   --color-pokemon: #3e92e6;
+  --color-dragonball: #ff6a00;
   --animate-flash-red: flashRed 0.5s ease-in-out;
   --animate-scale: scale 0.5s ease-in-out;
   --animate-mistake: mistake 0.5s ease-in-out;
@@ -20,7 +23,6 @@
     url("../public/simpsons_bg.webp");
   background-size: cover;
   background-position: center;
-  background-attachment: fixed;
 }
 
 @utility bg-toon-pokemon {
@@ -28,7 +30,14 @@
     url("../public/pokemon_bg.webp");
   background-size: cover;
   background-position: center;
-  background-attachment: fixed;
+}
+
+@utility bg-toon-dragonball {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("../public/dragonball_bg.webp");
+  background-size: cover;
+  background-position: center;
+
 }
 
 @utility animate-flash-red {
@@ -85,6 +94,25 @@
 
   &::-webkit-scrollbar-thumb {
     background-color: var(--color-pokemon);
+    border-radius: 8px;
+  }
+}
+
+@utility scrollbar-dragonball {
+  &::-webkit-scrollbar {
+    width: 15px;
+    height: 15px;
+    overflow: hidden;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: var(--color-gray-200);
+    border-radius: 0px 8px 8px 0px;
+    overflow: hidden;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--color-dragonball);
     border-radius: 8px;
   }
 }

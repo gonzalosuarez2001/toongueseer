@@ -13,7 +13,6 @@ async function main() {
     data.results.map(async (pokemon, index) => {
       const toonId = index + 1;
       toons.push({
-       // id: toonId,
         name: pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1),
         image_url: `/${toonId}.webp`,
       });

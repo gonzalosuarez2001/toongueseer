@@ -2,7 +2,7 @@ import { PrismaClient } from "@prisma/client";
 import path from "path";
 import fs from "fs";
 
-const cartoonList = ["simpsons", "pokemon"];
+const cartoonList = [];
 
 const prisma = new PrismaClient();
 
@@ -19,6 +19,7 @@ files.forEach((file) => {
 
     const name = path.parse(file).name;
     toons[name] = jsonData;
+    cartoonList.push(name);
   }
 });
 

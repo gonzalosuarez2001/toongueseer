@@ -13,7 +13,9 @@
     "get-simpsons-toons": "node scripts/getSimpsonsCharacters.js",
     "get-simpsons-images": "node scripts/getSimpsonsImages.js",
     "get-pokemon-toons": "node scripts/getPokemonCharacters.js",
-    "get-pokemon-images": "node scripts/getPokemonImages.js"
+    "get-pokemon-images": "node scripts/getPokemonImages.js",
+    "get-dragonball-toons": "node scripts/getDragonBallCharacters.js",
+    "get-dragonball-images": "node scripts/getDragonBallImages.js"
   },
   "dependencies": {
     "@prisma/client": "^6.16.2",

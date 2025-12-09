@@ -13,32 +13,26 @@ async function main() {
       const toonId = i + 1;
       const imageUrl = `${apiImageUrl}/${toonId}.png`;
 
-      try {
-        const res = await fetch(imageUrl);
-        if (!res.ok) throw new Error(`Error al obtener la imagen ${toonId}`);
+      const res = await fetch(imageUrl);
+      if (!res.ok) throw new Error(`Error al obtener la imagen ${toonId}`);
 
-        const arrayBuffer = await res.arrayBuffer();
-        const buffer = Buffer.from(arrayBuffer);
+      const arrayBuffer = await res.arrayBuffer();
+      const buffer = Buffer.from(arrayBuffer);
 
-        const savePath = path.join(
-          process.cwd(),
-          "public/pokemon_toons",
-          `${toonId}.webp`
-        );
+      const savePath = path.join(
+        process.cwd(),
+        "public/pokemon_toons",
+        `${toonId}.webp`
+      );
 
-        const webpBuffer = await sharp(buffer)
-          .webp({
-            quality: 80, // ajustá entre 50 y 100 según lo que necesites
-            effort: 4, // nivel de compresión (1–6), más alto = más lento pero más pequeño
-          })
-          .toBuffer();
+      const webpBuffer = await sharp(buffer)
+        .webp({
+          quality: 80, // ajustá entre 50 y 100 según lo que necesites
+          effort: 4, // nivel de compresión (1–6), más alto = más lento pero más pequeño
+        })
+        .toBuffer();
 
-        fs.writeFileSync(savePath, webpBuffer);
-
-        console.log(`✅ Guardado: ${toonId}.webp`);
-      } catch (error) {
-        console.error(`❌ Error con imagen ${i + 1}:`, error.message);
-      }
+      fs.writeFileSync(savePath, webpBuffer);
     })
   );
 }

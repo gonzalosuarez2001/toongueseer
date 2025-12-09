@@ -24,24 +24,18 @@ export default function ToonTemplate({
   const { loadContext, loading } = useToon();
 
   useEffect(() => {
-    loadContext(
-      cartoon,
-      toons,
-      dailyToon,
-    );
+    loadContext(cartoon, toons, dailyToon);
   }, []);
 
   let containerStyles = "";
   let loadingStyles = "";
 
-  if (cartoon != "") {
-    containerStyles = `${cartoonConfig[cartoon].backgroundImage} ${cartoonConfig[cartoon].font}`;
-    loadingStyles = `${cartoonConfig[cartoon].loading}`;
-  }
+  containerStyles = `${cartoonConfig[cartoon].backgroundImage} ${cartoonConfig[cartoon].font}`;
+  loadingStyles = `${cartoonConfig[cartoon].loading}`;
 
   return (
     <div
-      className={`${containerStyles} relative min-h-screen w-screen flex justify-center`}
+      className={`${containerStyles} bg-fixed relative min-h-screen w-screen flex justify-center`}
     >
       {loading ? (
         <div className="h-100vh border w-full flex justify-center items-center">
