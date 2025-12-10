@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "dev": "NODE_ENV=development nodemon app.ts",
-    "prd": "NODE_ENV=production pm2 start app.ts --name cron-toonguesser",
+    "prd": "NODE_ENV=production pm2 start dist/app.js --name cron-toonguesser",
     "test": "echo \"Error: no test specified\" && exit 1",
     "prisma-update": "npx prisma db pull && npx prisma generate"
   },
