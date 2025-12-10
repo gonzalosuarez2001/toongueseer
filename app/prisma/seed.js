@@ -25,42 +25,41 @@ files.forEach((file) => {
 
 async function insertCartoons() {
   const cartoons = [];
-  await Promise.all(
-    cartoonList.map(async (cartoon) => {
-      console.log(`Inserting cartoon: ${cartoon}`);
-      const res = await prisma.cartoon.create({
-        data: { name: cartoon },
-      });
-      cartoons.push(res);
-    })
-  );
+
+  for (const cartoon of cartoonList) {
+    console.log(`Inserting cartoon: ${cartoon}`);
+
+    const res = await prisma.cartoon.create({
+      data: { name: cartoon },
+    });
+
+    cartoons.push(res);
+  }
+
   return cartoons;
 }
 
 async function insertStats(cartoons) {
-  await Promise.all(
-    cartoons.map(async (cartoon) => {
-      await prisma.stats.create({
-        data: {
-          cartoon_id: cartoon.id,
-        },
-      });
-    })
-  );
+  for (const cartoon of cartoons) {
+    await prisma.stats.create({
+      data: { cartoon_id: cartoon.id },
+    });
+  }
 }
 
 async function insertToons(cartoons) {
-  await Promise.all(
-    cartoons.map(async (cartoon) => {
-      await Promise.all(
-        toons[cartoon.name].map(async (toon) => {
-          await prisma.toon.create({
-            data: { ...toon, cartoon_id: cartoon.id },
-          });
-        })
-      );
-    })
-  );
+  for (const cartoon of cartoons) {
+    const toonList = toons[cartoon.name];
+
+    for (const toon of toonList) {
+      await prisma.toon.create({
+        data: {
+          ...toon,
+          cartoon_id: cartoon.id,
+        },
+      });
+    }
+  }
 }
 
 async function main() {
