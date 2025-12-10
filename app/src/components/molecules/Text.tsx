@@ -17,9 +17,7 @@ export default function Text({
 
   let formatType = "text-md";
 
-  if (cartoon != "") {
-    formatType = cartoonConfig[cartoon].textStyles[type];
-  }
+  formatType = cartoonConfig[cartoon].textStyles[type];
 
   return <p className={`${formatType} ${color} ${className}`}>{children}</p>;
 }

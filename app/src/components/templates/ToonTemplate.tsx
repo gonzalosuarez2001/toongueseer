@@ -35,7 +35,7 @@ export default function ToonTemplate({
 
   return (
     <div
-      className={`${containerStyles} bg-fixed relative min-h-screen w-screen flex justify-center`}
+      className={`${containerStyles} bg-scroll lg:bg-fixed relative min-h-screen w-screen flex justify-center`}
     >
       {loading ? (
         <div className="h-100vh border w-full flex justify-center items-center">
