@@ -9,6 +9,7 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  basePath: "/toons",
 };
 
 export default nextConfig;

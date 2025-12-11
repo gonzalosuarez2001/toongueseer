@@ -143,7 +143,7 @@ export default function ToonSelector() {
                     className="flex items-center p-2 hover:bg-gray-200/90 transition-colors cursor-pointer"
                   >
                     <Image
-                      src={`/${cartoon}_toons` + toon.image_url}
+                      src={`/toons/${cartoon}_toons` + toon.image_url}
                       alt="Character"
                       width={60}
                       height={60}
