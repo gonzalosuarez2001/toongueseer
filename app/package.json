@@ -7,6 +7,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "NODE_ENV=production next start",
+    "prd": "NODE_ENV=production pm2 start npm --name 'toonguesser' -- run start",
     "lint": "eslint",
     "migrate": "npx prisma migrate dev",
     "seed": "node prisma/seed.js",
