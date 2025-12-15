@@ -49,7 +49,7 @@ export default function ToonImage() {
       } bg-gray-200/90 border-4 ${borderStyle} p-4 rounded-lg mt-5 flex justify-center items-center flex-col`}
     >
       <PixelableImage
-        src={`/toons/${cartoon}_toons${dailyToonImage}`}
+        src={`/${cartoon}_toons${dailyToonImage}`}
         pixelDificulty={formatPixelDificulty}
         saturationDificulty={formatSaturationDificulty}
         enableRotation={formatRotation}

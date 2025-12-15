@@ -8,7 +8,7 @@ export default function ToonHeader() {
   return (
     <div className="w-full flex justify-center mt-5">
       <Image
-        src={`/toons/${cartoon}_logo.png`}
+        src={`/${cartoon}_logo.png`}
         alt="Toon Logo"
         width={250}
         height={0}

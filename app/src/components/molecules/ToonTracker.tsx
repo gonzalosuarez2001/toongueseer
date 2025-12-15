@@ -24,7 +24,7 @@ export default function ToonTracker() {
               } flex items-center p-3 rounded-md`}
             >
               <Image
-                src={`/toons/${cartoon}_toons` + toon.image_url}
+                src={`/${cartoon}_toons` + toon.image_url}
                 alt="Character"
                 width={60}
                 height={60}
