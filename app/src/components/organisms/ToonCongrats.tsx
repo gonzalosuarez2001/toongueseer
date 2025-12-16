@@ -38,9 +38,6 @@ export default function ToonCongrats() {
               )}
             />
           </div>
-          <Text type="md" className="text-center mt-2">
-            Thank you for playing ToonGuesser!
-          </Text>
         </div>
       )}
     </>

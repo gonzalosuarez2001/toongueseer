@@ -31,7 +31,7 @@ export default function ToonImage() {
     void element.offsetWidth;
     element.classList.add("animate-mistake");
   };
-  
+
   useEffect(() => {
     if (hasMounted) {
       triggerMistakeAnimation();

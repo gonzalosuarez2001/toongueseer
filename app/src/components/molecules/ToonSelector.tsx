@@ -57,6 +57,7 @@ export default function ToonSelector() {
 
   const handleSelect = async (id: number) => {
     if (id === dailyToonId) {
+      addTriedToon(id);
       shootConfetti();
       localStorage.setItem(`${cartoon}_solved`, "true");
       setSolved(true);

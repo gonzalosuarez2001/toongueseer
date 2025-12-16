@@ -15,12 +15,16 @@ export default function ToonTracker() {
           <div
             key={toon.id}
             className={`${
-              index == 0 && !solved && "animate-scale"
-            } ${bgStyle} rounded-lg transition-transform`}
+              index == 0 && "animate-scale"
+            } rounded-lg transition-transform`}
           >
             <div
               className={`${
-                index == 0 && !solved && "animate-flash-red"
+                index === 0
+                  ? solved
+                    ? "bg-green-400"
+                    : `animate-flash-red ${bgStyle}`
+                  : bgStyle
               } flex items-center p-3 rounded-md`}
             >
               <Image

@@ -8,7 +8,7 @@ export default function Text({
   className,
   children,
 }: {
-  type: "xl" | "lg" | "md" | "sm";
+  type: "xxl" | "xl" | "lg" | "md" | "sm";
   color?: string;
   className?: string;
   children: React.ReactNode;

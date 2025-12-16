@@ -23,7 +23,7 @@ const cartoonConfig = {
     title: "Pokémon",
     textStyles: {
       xxl: "text-6xl",
-      xl: "text-3xl",
+      xl: "text-3xl font-semibold",
       lg: "text-2xl",
       md: "text-xl",
       sm: "text-lg",
