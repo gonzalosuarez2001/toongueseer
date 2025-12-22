@@ -5,7 +5,7 @@ Sigue estos pasos detallados para agregar un nuevo cartoon al proyecto:
 1. **Crear carpeta y archivo `page.jsx`**
 
    - Dentro de `app/src/app/`, crea una carpeta con el nombre del cartoon.
-   - Dentro de esa carpeta, crea los archivos `page.tsx` y `layout.tsx`, y renderiza el componente ToonTemplate.tsx.
+   - Dentro de esa carpeta, crea los archivos `page.tsx`, `layout.tsx`, y renderizá el componente ToonTemplate.tsx.
 
 2. **Agregar el cartoon al `cartoonConfig` junto con sus estilos**
 
@@ -16,8 +16,8 @@ Sigue estos pasos detallados para agregar un nuevo cartoon al proyecto:
        - `font-{toon_name}`
        - `color-{toon_name}`
      - Utilidades de Tailwind:
-     - `@utility bg-toon-{toon_name}`
-     - `@utility scrollbar-{toon_name}`
+       - `@utility bg-toon-{toon_name}`
+       - `@utility scrollbar-{toon_name}`
 
 3. **Agregar archivo JSON con la información de los personajes**
 
