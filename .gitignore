@@ -12,6 +12,9 @@
 !.yarn/releases
 !.yarn/versions
 
+# cron
+/cron/dist
+
 # testing
 /coverage
 
