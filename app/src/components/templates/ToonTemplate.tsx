@@ -35,26 +35,28 @@ export default function ToonTemplate({
 
   return (
     <div
-      className={`${containerStyles} bg-fixed relative min-h-screen w-screen flex justify-center`}
+      className={`${containerStyles} relative h-screen w-screen overflow-hidden`}
     >
-      {loading ? (
-        <div className="h-100vh border w-full flex justify-center items-center">
-          <div
-            className={`${loadingStyles} size-12 border-4 border-transparent rounded-full animate-spin`}
-          />
-        </div>
-      ) : (
-        <div className="max-w-84">
-          <ToonHeader />
-          <ToonControls />
-          <ToonImage />
-          <ToonCongrats />
-          <ToonSelector />
-          <ToonTracker />
-          <ToonFooter />
-          <ToonFootNote />
-        </div>
-      )}
+      <div className="flex justify-center h-full overflow-y-auto">
+        {loading ? (
+          <div className="h-100vh border w-full flex justify-center items-center">
+            <div
+              className={`${loadingStyles} size-12 border-4 border-transparent rounded-full animate-spin`}
+            />
+          </div>
+        ) : (
+          <div className="max-w-84">
+            <ToonHeader />
+            <ToonControls />
+            <ToonImage />
+            <ToonCongrats />
+            <ToonSelector />
+            <ToonTracker />
+            <ToonFooter />
+            <ToonFootNote />
+          </div>
+        )}
+      </div>
     </div>
   );
 }
