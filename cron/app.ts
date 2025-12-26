@@ -95,7 +95,7 @@ async function revalidateToons() {
 
 // Cron
 cron.schedule(
-  "* * * * *",
+  "0 0 * * *",
   () => {
     console.log("\nExecuting Toon Guesser Cron\n");
     getDailyToons();
