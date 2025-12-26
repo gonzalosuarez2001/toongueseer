@@ -31,44 +31,42 @@ async function getDailyToons() {
   try {
     const cartoons = await prisma.cartoon.findMany();
 
-    await Promise.all(
-      cartoons.map(async (cartoon: Cartoon) => {
-        const toons = await prisma.toon.findMany({
-          where: { cartoon_id: cartoon.id },
-        });
+    for (const cartoon of cartoons) {
+      const toons = await prisma.toon.findMany({
+        where: { cartoon_id: cartoon.id },
+      });
 
-        const filteredToons = toons.filter(
-          (toon: Toon) => toon.guessed === false
-        );
+      const filteredToons = toons.filter(
+        (toon: Toon) => toon.guessed === false
+      );
 
-        const randomNumber = getRandomInt(filteredToons.length);
-        const selectedToon = filteredToons[randomNumber - 1].id;
+      const randomNumber = getRandomInt(filteredToons.length);
+      const selectedToon = filteredToons[randomNumber - 1].id;
 
-        console.log(
-          `New Daily Toon for ${cartoon.name}: ${selectedToon} ${
-            toons.find((toon: Toon) => toon.id === selectedToon)?.name
-          }`
-        );
+      console.log(
+        `New Daily Toon for ${cartoon.name}: ${selectedToon} ${
+          toons.find((toon: Toon) => toon.id === selectedToon)?.name
+        }`
+      );
 
-        if (filteredToons.length === 1) {
-          await resetDailyToons(cartoon.id);
-        }
+      if (filteredToons.length === 1) {
+        await resetDailyToons(cartoon.id);
+      }
 
-        await prisma.stats.update({
-          where: { cartoon_id: cartoon.id },
-          data: {
-            daily_toon: selectedToon,
-          },
-        });
+      await prisma.stats.update({
+        where: { cartoon_id: cartoon.id },
+        data: {
+          daily_toon: selectedToon,
+        },
+      });
 
-        await prisma.toon.update({
-          where: { id: selectedToon },
-          data: {
-            guessed: true,
-          },
-        });
-      })
-    );
+      await prisma.toon.update({
+        where: { id: selectedToon },
+        data: {
+          guessed: true,
+        },
+      });
+    }
   } catch (error) {
     console.error("Error while executing the cron:", error);
   }
@@ -97,7 +95,7 @@ async function revalidateToons() {
 
 // Cron
 cron.schedule(
-  "0 0 * * *",
+  "* * * * *",
   () => {
     console.log("\nExecuting Toon Guesser Cron\n");
     getDailyToons();
