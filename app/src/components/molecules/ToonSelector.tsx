@@ -57,13 +57,12 @@ export default function ToonSelector() {
 
   const handleSelect = async (id: number) => {
     if (id === dailyToonId) {
-      addTriedToon(id);
+      addTry(id);
       shootConfetti();
       localStorage.setItem(`${cartoon}_solved`, "true");
       setSolved(true);
     } else {
-      addTriedToon(id);
-      addCounter();
+      addTry(id);
     }
 
     setIsFocused(false);

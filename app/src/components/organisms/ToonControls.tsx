@@ -27,7 +27,7 @@ export default function ToonControls() {
             title="Depixelation"
             icon={Image}
             active={depixelation}
-            onClick={switchDepixelation}
+            onClick={toggleDepixelationAndPersist}
             levels={true}
             difficulty={pixelDificulty}
           />
@@ -35,13 +35,13 @@ export default function ToonControls() {
             title="Rotation"
             icon={RotateCw}
             active={rotation}
-            onClick={switchRotation}
+            onClick={toggleRotationAndPersist}
           />
           <ToonControlButton
             title="Desaturation"
             icon={Palette}
             active={desaturation}
-            onClick={switchDesaturation}
+            onClick={toggleDesaturationAndPersist}
             levels={true}
             difficulty={saturationDificulty}
           />

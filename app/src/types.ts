@@ -1,3 +1,5 @@
+import cartoonConfig from "./cartoonConfig";
+
 export type Toon = {
   id: number;
   name: string;
@@ -11,4 +13,4 @@ export type Stats = {
   daily_toon: number;
 };
 
-export type Cartoon = "simpsons" | "pokemon" | "dragonball";
+export type Cartoon = keyof typeof cartoonConfig;
