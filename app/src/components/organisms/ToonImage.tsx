@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import PixelableImage from "./PixelableImage";
-import { useToon } from "@/hooks/ToonContext";
+import { useAppSelector } from "@/store/hooks";
 
 export default function ToonImage() {
   const divRef = useRef<HTMLDivElement>(null);
@@ -14,7 +14,7 @@ export default function ToonImage() {
     saturationDificulty,
     borderStyle,
     cartoon,
-  } = useToon();
+  } = useAppSelector((state) => state.game);
 
   const [hasMounted, setHasMounted] = useState<boolean>(false);
 

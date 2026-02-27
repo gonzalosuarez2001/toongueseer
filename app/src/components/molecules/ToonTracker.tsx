@@ -2,11 +2,13 @@
 import React, { use, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import type { Toon } from "../../types";
-import { useToon } from "@/hooks/ToonContext";
 import Text from "./Text";
+import { useAppSelector } from "@/store/hooks";
 
 export default function ToonTracker() {
-  const { triedToons, solved, cartoon, bgStyle } = useToon();
+  const { triedToons, solved, cartoon, bgStyle } = useAppSelector(
+    (state) => state.game,
+  );
 
   return (
     <div className="flex flex-col gap-2 mt-5">

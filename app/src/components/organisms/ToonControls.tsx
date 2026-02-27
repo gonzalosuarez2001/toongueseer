@@ -1,7 +1,11 @@
-import { useToon } from "@/hooks/ToonContext";
-import React from "react";
 import { Palette, Image, RotateCw } from "lucide-react";
 import ToonControlButton from "../molecules/ToonControlButton";
+import { useAppSelector, useAppDispatch } from "@/store/hooks";
+import {
+  toggleDepixelationAndPersist,
+  toggleDesaturationAndPersist,
+  toggleRotationAndPersist,
+} from "@/store/features/game/gameThunks";
 
 export default function ToonControls() {
   const {
@@ -9,13 +13,12 @@ export default function ToonControls() {
     desaturation,
     depixelation,
     rotation,
-    switchDepixelation,
-    switchRotation,
-    switchDesaturation,
     pixelDificulty,
     saturationDificulty,
     borderStyle,
-  } = useToon();
+  } = useAppSelector((state) => state.game);
+
+  const dispatch = useAppDispatch();
 
   return (
     <>
@@ -27,7 +30,7 @@ export default function ToonControls() {
             title="Depixelation"
             icon={Image}
             active={depixelation}
-            onClick={toggleDepixelationAndPersist}
+            onClick={() => dispatch(toggleDepixelationAndPersist())}
             levels={true}
             difficulty={pixelDificulty}
           />
@@ -35,13 +38,13 @@ export default function ToonControls() {
             title="Rotation"
             icon={RotateCw}
             active={rotation}
-            onClick={toggleRotationAndPersist}
+            onClick={() => dispatch(toggleRotationAndPersist())}
           />
           <ToonControlButton
             title="Desaturation"
             icon={Palette}
             active={desaturation}
-            onClick={toggleDesaturationAndPersist}
+            onClick={() => dispatch(toggleDesaturationAndPersist())}
             levels={true}
             difficulty={saturationDificulty}
           />

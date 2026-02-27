@@ -1,7 +1,6 @@
 "use client";
 import type { Toon, Cartoon } from "../../types";
 import { useEffect } from "react";
-import { useToon } from "@/hooks/ToonContext";
 import ToonHeader from "../organisms/ToonHeader";
 import ToonImage from "../organisms/ToonImage";
 import ToonFooter from "../organisms/ToonFooter";
@@ -11,6 +10,8 @@ import ToonCongrats from "../organisms/ToonCongrats";
 import ToonControls from "../organisms/ToonControls";
 import ToonFootNote from "../organisms/ToonFootNote";
 import cartoonConfig from "@/cartoonConfig";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import { setupToonGame } from "@/store/features/game/gameThunks";
 
 export default function ToonTemplate({
   cartoon,
@@ -21,10 +22,11 @@ export default function ToonTemplate({
   toons: Toon[];
   dailyToon: Toon;
 }) {
-  const { loadContext, loading } = useToon();
+  const { loading } = useAppSelector((state) => state.game);
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
-    loadContext(cartoon, toons, dailyToon);
+    dispatch(setupToonGame(cartoon, toons, dailyToon));
   }, []);
 
   let containerStyles = "";

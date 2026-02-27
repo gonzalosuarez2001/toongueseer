@@ -1,13 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
 import gameReducer from "./features/game/gameSlice";
-import { ThunkAction } from "@reduxjs/toolkit";
-import { Action } from "redux";
 
-export const store = configureStore({
-  reducer: {
-    game: gameReducer,
-  },
-});
+export const makeStore = () =>
+  configureStore({
+    reducer: {
+      game: gameReducer,
+    },
+  });
 
-export type RootState = ReturnType<typeof store.getState>;
-export type AppDispatch = typeof store.dispatch;
+export type AppStore = ReturnType<typeof makeStore>;
+export type RootState = ReturnType<AppStore["getState"]>;
+export type AppDispatch = AppStore["dispatch"];

@@ -2,22 +2,22 @@
 import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import type { Toon } from "../../types";
-import { useToon } from "@/hooks/ToonContext";
 import confetti from "canvas-confetti";
 import Text from "./Text";
+import { useAppSelector, useAppDispatch } from "@/store/hooks";
+import { addTry } from "@/store/features/game/gameThunks";
+import { setField } from "@/store/features/game/gameSlice";
 
 export default function ToonSelector() {
   const {
-    addTriedToon,
-    addCounter,
     dailyToonId,
     cartoon,
     toons,
-    setSolved,
     solved,
     borderStyle,
     scrollStyle,
-  } = useToon();
+  } = useAppSelector((state) => state.game);
+  const dispatch = useAppDispatch();
 
   const inputRef = useRef<HTMLInputElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -57,12 +57,12 @@ export default function ToonSelector() {
 
   const handleSelect = async (id: number) => {
     if (id === dailyToonId) {
-      addTry(id);
+      dispatch(addTry(id));
       shootConfetti();
       localStorage.setItem(`${cartoon}_solved`, "true");
-      setSolved(true);
+      dispatch(setField({ field: "solved", value: true }));
     } else {
-      addTry(id);
+      dispatch(addTry(id));
     }
 
     setIsFocused(false);

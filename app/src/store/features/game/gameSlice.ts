@@ -84,10 +84,12 @@ const gameSlice = createSlice({
       state.counter = state.counter + 1;
     },
     lowDepixelationLevel: (state) => {
-      state.pixelDificulty = state.pixelDificulty - 1;
+      if (state.pixelDificulty > 1)
+        state.pixelDificulty = state.pixelDificulty - 1;
     },
     lowDesaturationLevel: (state) => {
-      state.saturationDificulty = state.saturationDificulty - 1;
+      if (state.saturationDificulty > 1)
+        state.saturationDificulty = state.saturationDificulty - 1;
     },
     toggleDepixelation: (state) => {
       state.depixelation = !state.depixelation;
