@@ -1,10 +1,9 @@
-import { useToon } from "@/hooks/ToonContext";
+import { useAppSelector } from "@/store/hooks";
 import Image from "next/image";
-import React from "react";
 
 export default function ToonHeader() {
-  const { cartoon } = useToon();
-  
+  const { cartoon } = useAppSelector((state) => state.game);
+
   return (
     <div className="w-full flex justify-center mt-5">
       <Image

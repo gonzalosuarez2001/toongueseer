@@ -1,5 +1,5 @@
 "use client";
-import { useToon } from "@/hooks/ToonContext";
+import { useAppSelector } from "@/store/hooks";
 import { useRef, useEffect, useState } from "react";
 
 export default function PixelableImage({
@@ -17,7 +17,7 @@ export default function PixelableImage({
 }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
-  const { rotationAngle, pixelationLevels, saturationLevels } = useToon();
+  const { rotationAngle, pixelationLevels, saturationLevels } = useAppSelector((state) => state.game);
   const [scaledHeightState, setScaledHeightState] = useState<number>();
 
   const pixelation = pixelationLevels[pixelDificulty];

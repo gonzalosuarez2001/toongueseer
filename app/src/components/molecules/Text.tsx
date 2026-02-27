@@ -1,6 +1,6 @@
 import React from "react";
 import cartoonConfig from "../../cartoonConfig";
-import { useToon } from "@/hooks/ToonContext";
+import { useAppSelector } from "@/store/hooks";
 
 export default function Text({
   type,
@@ -13,7 +13,7 @@ export default function Text({
   className?: string;
   children: React.ReactNode;
 }) {
-  const { cartoon } = useToon();
+  const cartoon = useAppSelector((state)=> state.game.cartoon)
 
   let formatType = "text-md";
 

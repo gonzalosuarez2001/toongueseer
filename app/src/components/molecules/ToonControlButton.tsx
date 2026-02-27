@@ -1,6 +1,6 @@
-import { useToon } from "@/hooks/ToonContext";
 import React from "react";
 import Text from "./Text";
+import { useAppSelector } from "@/store/hooks";
 
 export default function ToonControlButton({
   title,
@@ -19,7 +19,7 @@ export default function ToonControlButton({
 }) {
   const maxDifficulty = Number(process.env.NEXT_PUBLIC_MAX_DIFFICULTY) || 7;
 
-  const { bgStyle, textStyle } = useToon();
+  const { bgStyle, textStyle } = useAppSelector((state) => state.game);
 
   return (
     <div className="flex flex-col items-center space-y-1">
@@ -29,9 +29,7 @@ export default function ToonControlButton({
           active ? "bg-black/20" : " hover:bg-black/10"
         }  rounded-full   p-3 cursor-pointer transition-colors`}
       >
-        <Icon
-          className={`${active ? textStyle : "text-gray-700"} size-8`}
-        />
+        <Icon className={`${active ? textStyle : "text-gray-700"} size-8`} />
       </button>
       <Text type="md">{title}</Text>
 

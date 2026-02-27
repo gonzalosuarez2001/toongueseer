@@ -1,10 +1,9 @@
-import { useToon } from "@/hooks/ToonContext";
-import React from "react";
 import Countdown from "react-countdown";
 import Text from "../molecules/Text";
+import { useAppSelector } from "@/store/hooks";
 
 export default function ToonCongrats() {
-  const { solved, borderStyle } = useToon();
+  const { solved, borderStyle } = useAppSelector((state) => state.game);
 
   const now = new Date();
   const nextUTC = new Date(
@@ -15,15 +14,19 @@ export default function ToonCongrats() {
       0,
       0,
       0,
-      0
-    )
+      0,
+    ),
   );
 
   return (
     <>
       {solved && (
-        <div className={`bg-gray-200/90 border-4 ${borderStyle} rounded-lg mt-5 p-4 flex flex-col items-center`}>
-          <Text type="xl" className="mb-2">Congratulations!</Text>
+        <div
+          className={`bg-gray-200/90 border-4 ${borderStyle} rounded-lg mt-5 p-4 flex flex-col items-center`}
+        >
+          <Text type="xl" className="mb-2">
+            Congratulations!
+          </Text>
           <div className="flex flex-col items-center mb-2">
             <Text type="sm">Next toon in:</Text>
             <Countdown
