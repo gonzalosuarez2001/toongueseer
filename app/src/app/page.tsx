@@ -14,7 +14,7 @@ export default function Home() {
             className="text-5xl lg:text-6xl text-rose-500 text-center font-luckiest mb-4"
             style={{ textShadow: "2px 2px 4px rgba(0,0,0,0.7)" }}
           >
-            Toon Guesser - DEPLOY TRY
+            Toon Guesser
           </h1>
           <p
             className="text-xl text-white text-center font-luckiest"
