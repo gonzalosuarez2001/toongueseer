@@ -24,6 +24,10 @@ jobs:
         run: |
           ssh deploy@212.85.0.110 "
             set -e
+
+            # General
+            cd /opt/toongueseer
+            git pull origin main
           
             # App
             cd /opt/toongueseer/app
