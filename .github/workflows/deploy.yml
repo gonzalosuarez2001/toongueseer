@@ -31,12 +31,12 @@ jobs:
           
             # App
             cd /opt/toongueseer/app
-            npm install
+            npm ci
             npm run build
 
             # Cron
             cd /opt/toongueseer/cron
-            npm install
+            npm ci
             npm run build
 
             # Restart apps
