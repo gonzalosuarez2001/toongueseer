@@ -33,11 +33,13 @@ jobs:
             cd /opt/toongueseer/app
             npm ci
             npm run build
+            npx prisma generate
 
             # Cron
             cd /opt/toongueseer/cron
             npm ci
             npm run build
+            npx prisma generate
 
             # Restart apps
             pm2 restart toonguesser cron-toonguesser
