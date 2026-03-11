@@ -1,16 +1,20 @@
 // Env Config
-const express = require("express");
-require("dotenv").config();
+import express from "express";
+import dotenv from "dotenv";
+dotenv.config();
+import cron from "node-cron";
+import { PrismaClient } from "./generated/prisma/client.js";
+import { PrismaPg } from "@prisma/adapter-pg";
+import { randomInt } from "crypto";
+
 const PORT = process.env.PORT || "8082";
-const cron = require("node-cron");
-const { PrismaClient } = require("@prisma/client");
-const { randomInt } = require("crypto");
 
 // Server
 const app = express();
 
 // DB
-const prisma = new PrismaClient();
+const adapter = new PrismaPg({ connectionString: process.env.DATABASE_URL! });
+const prisma = new PrismaClient({ adapter });
 
 // Types
 type Cartoon = {

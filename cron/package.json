@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
+  "type": "module",
   "scripts": {
-    "dev": "NODE_ENV=development nodemon app.ts",
+    "dev": "NODE_ENV=development nodemon --exec tsx app.ts",
     "build": "npx tsc",
     "prd": "NODE_ENV=production pm2 start dist/app.js --name cron-toonguesser",
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -13,17 +14,20 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@prisma/client": "^6.16.2",
+    "@prisma/adapter-pg": "^7.5.0",
+    "@prisma/client": "^7.5.0",
     "dotenv": "^17.2.2",
     "express": "^5.1.0",
     "node-cron": "^4.2.1",
     "nodemon": "^3.1.10",
-    "prisma": "^6.16.2",
-    "ts-node": "^10.9.2"
+    "pg": "^8.20.0",
+    "prisma": "^7.5.0"
   },
   "devDependencies": {
+    "@types/express": "^5.0.6",
     "@types/node": "^24.5.1",
-    "install": "^0.13.0",
-    "npm": "^11.6.0"
+    "@types/pg": "^8.11.0",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3"
   }
 }

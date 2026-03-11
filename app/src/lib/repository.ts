@@ -1,5 +1,5 @@
 import { prisma } from "@/lib/db";
-import type { Toon } from "@prisma/client";
+import type { Toon } from "../../generated/prisma/client";
 
 export async function getToons(cartoon: string) {
   try {

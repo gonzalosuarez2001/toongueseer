@@ -1,13 +1,18 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient } from "../generated/prisma/client.js";
+import { PrismaPg } from "@prisma/adapter-pg";
 import path from "path";
 import fs from "fs";
 
-const cartoonList = [];
+type CartoonRecord = { id: number; name: string };
+type ToonData = { name: string; image_url: string };
 
-const prisma = new PrismaClient();
+const cartoonList: string[] = [];
+
+const adapter = new PrismaPg({ connectionString: process.env.DATABASE_URL });
+const prisma = new PrismaClient({ adapter });
 
 const dataDir = path.join(process.cwd(), "data");
-const toons = {};
+const toons: Record<string, ToonData[]> = {};
 
 const files = fs.readdirSync(dataDir);
 
@@ -15,7 +20,7 @@ files.forEach((file) => {
   if (file.endsWith(".json")) {
     const filePath = path.join(dataDir, file);
     const rawData = fs.readFileSync(filePath, "utf-8");
-    const jsonData = JSON.parse(rawData);
+    const jsonData = JSON.parse(rawData) as ToonData[];
 
     const name = path.parse(file).name;
     toons[name] = jsonData;
@@ -23,8 +28,8 @@ files.forEach((file) => {
   }
 });
 
-async function insertCartoons() {
-  const cartoons = [];
+async function insertCartoons(): Promise<CartoonRecord[]> {
+  const cartoons: CartoonRecord[] = [];
 
   for (const cartoon of cartoonList) {
     console.log(`Inserting cartoon: ${cartoon}`);
@@ -39,7 +44,7 @@ async function insertCartoons() {
   return cartoons;
 }
 
-async function insertStats(cartoons) {
+async function insertStats(cartoons: CartoonRecord[]) {
   for (const cartoon of cartoons) {
     await prisma.stats.create({
       data: { cartoon_id: cartoon.id },
@@ -47,7 +52,7 @@ async function insertStats(cartoons) {
   }
 }
 
-async function insertToons(cartoons) {
+async function insertToons(cartoons: CartoonRecord[]) {
   for (const cartoon of cartoons) {
     const toonList = toons[cartoon.name];
 
