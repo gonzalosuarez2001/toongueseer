@@ -32,14 +32,14 @@ jobs:
             git pull origin main
           
             # App
-            cd /opt/toongueseer/app
-            docker build -t toonguesser:production -f Dockerfile.prd .
+            cd /opt/toongueseer/frontend
+            docker build --build-arg DATABASE_URL="$DATABASE_URL" -t toonguesser:production -f Dockerfile.prd .
             docker compose -f compose.prd.yaml up -d --remove-orphans --force-recreate
             docker image prune -f
             
             # Cron
             cd /opt/toongueseer/cron
-            docker build -t toonguesser-cron:production -f Dockerfile.prd .
+            docker build --build-arg DATABASE_URL="$DATABASE_URL" -t toonguesser-cron:production -f Dockerfile.prd .
             docker compose -f compose.prd.yaml up -d --remove-orphans --force-recreate
             
             # Cleanup

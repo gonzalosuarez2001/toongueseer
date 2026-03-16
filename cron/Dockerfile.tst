@@ -13,4 +13,7 @@ RUN npx prisma generate
 COPY entrypoint.*.sh ./
 RUN chmod +x entrypoint.*.sh
 
+ARG DATABASE_URL
+ENV DATABASE_URL=$DATABASE_URL
+
 RUN npm run build

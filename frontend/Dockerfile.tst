@@ -15,4 +15,7 @@ RUN chmod +x entrypoint.*.sh
 
 ENV NEXT_PUBLIC_MAX_DIFFICULTY=7
 
+ARG DATABASE_URL
+ENV DATABASE_URL=$DATABASE_URL
+
 RUN npm run build
