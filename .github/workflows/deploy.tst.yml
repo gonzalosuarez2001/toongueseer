@@ -38,12 +38,12 @@ jobs:
           
             # App
             cd /opt/toongueseer/frontend
-            docker build --network=host --build-arg BUILD_DATABASE_URL=\"$BUILD_DATABASE_URL\" -t toonguesser:testing -f Dockerfile.tst .
+            docker build -t toonguesser:testing -f Dockerfile.tst .
             docker compose -f compose.tst.yaml up -d --remove-orphans --force-recreate
 
             # Cron
             cd /opt/toongueseer/cron
-            docker build --network=host --build-arg BUILD_DATABASE_URL=\"$BUILD_DATABASE_URL\" -t toonguesser-cron:testing -f Dockerfile.tst .
+            docker build -t toonguesser-cron:testing -f Dockerfile.tst .
             docker compose -f compose.tst.yaml up -d --remove-orphans --force-recreate
 
             # Cleanup

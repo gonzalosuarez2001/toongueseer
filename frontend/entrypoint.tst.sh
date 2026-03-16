@@ -1,10 +1,7 @@
 #!/bin/sh
 
-echo "Ejecuto Migraciones"
-npm run migrate; 
-
-echo "Ejecuto Seed"
-npm run seed; 
+echo "Construyendo Aplicación"
+npm run build
 
 echo "Inicio Aplicación"
 npm run start;
