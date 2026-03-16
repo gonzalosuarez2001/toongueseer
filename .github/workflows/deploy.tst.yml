@@ -28,6 +28,7 @@ jobs:
 
             # Set environment variables
             export DATABASE_URL='${{ secrets.DATABASE_URL }}'
+            export BUILD_DATABASE_URL='${{ secrets.BUILD_DATABASE_URL }}'
 
             # General
             cd /opt/toongueseer
@@ -35,13 +36,12 @@ jobs:
           
             # App
             cd /opt/toongueseer/frontend
-            docker build --build-arg DATABASE_URL="$DATABASE_URL" -t toonguesser:testing -f Dockerfile.tst .
+            docker build --network=host --build-arg DATABASE_URL="$BUILD_DATABASE_URL" -t toonguesser:testing -f Dockerfile.tst .
             docker compose -f compose.tst.yaml up -d --remove-orphans --force-recreate
-
 
             # Cron
             cd /opt/toongueseer/cron
-            docker build --build-arg DATABASE_URL="$DATABASE_URL" -t toonguesser-cron:testing -f Dockerfile.tst .
+            docker build --network=host --build-arg DATABASE_URL="$BUILD_DATABASE_URL" -t toonguesser-cron:testing -f Dockerfile.tst .
             docker compose -f compose.tst.yaml up -d --remove-orphans --force-recreate
 
             # Cleanup

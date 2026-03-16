@@ -8,6 +8,8 @@ services:
       - PORT=8082
       - DATABASE_URL=${DATABASE_URL}
       - API_URL=http://toon-tst:3000
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     networks:
       - toon-net-tst
 
