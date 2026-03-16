@@ -9,6 +9,7 @@
     "start": "next start",
     "lint": "eslint",
     "migrate": "npx prisma migrate dev",
+    "migrate-prd": "npx prisma migrate deploy",
     "seed": "npx prisma db seed",
     "get-simpsons-toons": "node scripts/getSimpsonsCharacters.js",
     "get-simpsons-images": "node scripts/getSimpsonsImages.js",

@@ -7,26 +7,8 @@ services:
       - NODE_ENV=testing
       - NEXT_PUBLIC_MAX_DIFFICULTY=7
       - DATABASE_URL=${DATABASE_URL}
-    depends_on:
-      toon-db:
-        condition: service_healthy
     networks:
       - toon-net-tst
-
-  toon-db:
-    image: "postgres:16"
-    container_name: "toon-db-tst"
-    environment:
-      - POSTGRES_USER=${DATABASE_USER}
-      - POSTGRES_PASSWORD=${DATABASE_PASSWORD}
-      - POSTGRES_DB=toon
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U dev -d toon"]
-      interval: 5s
-      timeout: 5s
-      retries: 5
-    networks:
-      - toon-net
 
 networks:
   toon-net-tst:

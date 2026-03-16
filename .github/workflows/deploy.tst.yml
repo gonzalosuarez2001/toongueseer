@@ -28,8 +28,6 @@ jobs:
 
             # Set environment variables
             export DATABASE_URL='${{ secrets.DATABASE_URL }}'
-            export DATABASE_USER='${{ secrets.DATABASE_USER }}'
-            export DATABASE_PASSWORD='${{ secrets.DATABASE_PASSWORD }}'
 
             # General
             cd /opt/toongueseer
