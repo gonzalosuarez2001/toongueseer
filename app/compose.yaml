@@ -1,9 +1,0 @@
-services:
-  toon-db:
-    image: "postgres:16"
-    container_name: "toon-db"
-    ports: ["3310:5432"]
-    environment:
-      - POSTGRES_USER=dev
-      - POSTGRES_PASSWORD=asd123
-      - POSTGRES_DB=toon

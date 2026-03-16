@@ -1,0 +1,50 @@
+name: Deploy Testing to VPS
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: testing
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up SSH
+        uses: webfactory/ssh-agent@v0.5.3
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Add VPS to known_hosts
+        run: ssh-keyscan 212.85.0.110 >> ~/.ssh/known_hosts
+
+      - name: Deploy to VPS
+        run: |
+          ssh deploy@212.85.0.110 "
+            set -e
+
+            # Set environment variables
+            export DATABASE_URL='${{ secrets.DATABASE_URL }}'
+            export DATABASE_USER='${{ secrets.DATABASE_USER }}'
+            export DATABASE_PASSWORD='${{ secrets.DATABASE_PASSWORD }}'
+
+            # General
+            cd /opt/toongueseer
+            git pull origin testing
+          
+            # App
+            cd /opt/toongueseer/app
+            docker build -t toonguesser:testing -f Dockerfile.tst .
+            docker compose -f compose.tst.yaml up -d --remove-orphans --force-recreate
+
+            # Cron
+            cd /opt/toongueseer/cron
+            docker build -t toonguesser-cron:testing -f Dockerfile.tst .
+            docker compose -f compose.tst.yaml up -d --remove-orphans --force-recreate
+
+            # Cleanup
+            docker image prune -f
+          "

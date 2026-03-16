@@ -1,0 +1,16 @@
+services:
+  cron:
+    container_name: toon-cron-prd
+    image: toonguesser-cron:production
+    entrypoint: ["./entrypoint.prd.sh"]
+    environment:
+      - NODE_ENV=production
+      - PORT=8082
+      - DATABASE_URL=${DATABASE_URL}
+      - API_URL=http://toon-prd:3000
+    networks:
+      - toon-net-prd
+
+networks:
+  toon-net-prd:
+    external: true

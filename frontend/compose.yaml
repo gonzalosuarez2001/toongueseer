@@ -1,0 +1,39 @@
+services:
+  toon:
+    build: 
+      context: .
+      dockerfile: Dockerfile.dev
+    container_name: "toon"
+    ports: ["3000:3000"]
+    entrypoint: ["./entrypoint.dev.sh"]
+    volumes:
+      - ./app/src:/app/src
+    environment:
+      - NODE_ENV=development
+      - NEXT_PUBLIC_MAX_DIFFICULTY=7
+      - DATABASE_URL=postgresql://dev:asd123@toon-db:5432/toon
+    depends_on:
+      toon-db:
+        condition: service_healthy
+    networks:
+      - toon-net
+
+  toon-db:
+    image: "postgres:16"
+    container_name: "toon-db"
+    ports: ["3310:5432"]
+    environment:
+      - POSTGRES_USER=dev
+      - POSTGRES_PASSWORD=asd123
+      - POSTGRES_DB=toon
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U dev -d toon"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - toon-net
+
+networks:
+  toon-net:
+    name: toon-net

@@ -1,0 +1,47 @@
+name: Deploy Production to VPS
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up SSH
+        uses: webfactory/ssh-agent@v0.5.3
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Add VPS to known_hosts
+        run: ssh-keyscan 212.85.0.110 >> ~/.ssh/known_hosts
+
+      - name: Deploy to VPS
+        run: |
+          ssh deploy@212.85.0.110 "
+            set -e
+
+            # Set environment variables
+            export DATABASE_URL='${{ secrets.DATABASE_URL }}'
+
+            # General
+            cd /opt/toongueseer
+            git pull origin main
+          
+            # App
+            cd /opt/toongueseer/app
+            docker build -t toonguesser:production -f Dockerfile.prd .
+            docker compose -f compose.prd.yaml up -d --remove-orphans --force-recreate
+            docker image prune -f
+            
+            # Cron
+            cd /opt/toongueseer/cron
+            docker build -t toonguesser-cron:production -f Dockerfile.prd .
+            docker compose -f compose.prd.yaml up -d --remove-orphans --force-recreate
+            
+            # Cleanup
+            docker image prune -f
+          "

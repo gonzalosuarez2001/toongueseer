@@ -1,0 +1,64 @@
+"use client";
+import type { Toon, Cartoon } from "../../types";
+import { useEffect } from "react";
+import ToonHeader from "../organisms/ToonHeader";
+import ToonImage from "../organisms/ToonImage";
+import ToonFooter from "../organisms/ToonFooter";
+import ToonSelector from "../molecules/ToonSelector";
+import ToonTracker from "../molecules/ToonTracker";
+import ToonCongrats from "../organisms/ToonCongrats";
+import ToonControls from "../organisms/ToonControls";
+import ToonFootNote from "../organisms/ToonFootNote";
+import cartoonConfig from "../../cartoonConfig";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import { setupToonGame } from "../../store/features/game/gameThunks";
+
+export default function ToonTemplate({
+  cartoon,
+  toons,
+  dailyToon,
+}: {
+  cartoon: Cartoon;
+  toons: Toon[];
+  dailyToon: Toon;
+}) {
+  const { loading } = useAppSelector((state) => state.game);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(setupToonGame(cartoon, toons, dailyToon));
+  }, []);
+
+  let containerStyles = "";
+  let loadingStyles = "";
+
+  containerStyles = `${cartoonConfig[cartoon].backgroundImage} ${cartoonConfig[cartoon].font}`;
+  loadingStyles = `${cartoonConfig[cartoon].loading}`;
+
+  return (
+    <div
+      className={`${containerStyles} relative h-screen w-screen overflow-hidden`}
+    >
+      <div className="flex justify-center h-full overflow-y-auto">
+        {loading ? (
+          <div className="h-100vh border w-full flex justify-center items-center">
+            <div
+              className={`${loadingStyles} size-12 border-4 border-transparent rounded-full animate-spin`}
+            />
+          </div>
+        ) : (
+          <div className="max-w-84">
+            <ToonHeader />
+            <ToonControls />
+            <ToonImage />
+            <ToonCongrats />
+            <ToonSelector />
+            <ToonTracker />
+            <ToonFooter />
+            <ToonFootNote />
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}

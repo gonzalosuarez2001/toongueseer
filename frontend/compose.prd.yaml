@@ -1,0 +1,15 @@
+services:
+  toon:
+    container_name: toon-prd
+    image: toonguesser:production
+    entrypoint: ["./entrypoint.prd.sh"]
+    environment:
+      - NODE_ENV=production
+      - NEXT_PUBLIC_MAX_DIFFICULTY=7
+      - DATABASE_URL=${DATABASE_URL}
+    networks:
+      - toon-net-prd
+
+networks:
+  toon-net-prd:
+    name: toon-net-prd

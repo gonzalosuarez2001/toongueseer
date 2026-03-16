@@ -1,0 +1,20 @@
+services:
+  cron:
+    build: 
+      context: .
+      dockerfile: Dockerfile.dev
+    container_name: toon-cron
+    entrypoint: ["./entrypoint.dev.sh"]
+    volumes:
+      - ./app/app.ts:/app/app.ts
+    environment:
+      - NODE_ENV=development
+      - PORT=8082
+      - DATABASE_URL=postgresql://dev:asd123@toon-db:5432/toon
+      - API_URL=http://toon:3000
+    networks:
+      - toon-net
+
+networks:
+  toon-net:
+    external: true
