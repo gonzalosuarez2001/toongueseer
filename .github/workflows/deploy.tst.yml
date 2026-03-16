@@ -33,7 +33,7 @@ jobs:
 
             # General
             cd /opt/toongueseer
-            git pull origin testing
+            git pull origin main
           
             # App
             cd /opt/toongueseer/app
