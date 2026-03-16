@@ -36,7 +36,7 @@ jobs:
             git pull origin main
           
             # App
-            cd /opt/toongueseer/app
+            cd /opt/toongueseer/frontend
             docker build -t toonguesser:testing -f Dockerfile.tst .
             docker compose -f compose.tst.yaml up -d --remove-orphans --force-recreate
 
