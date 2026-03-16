@@ -4,7 +4,6 @@ services:
     image: toonguesser-cron:testing
     entrypoint: ["./entrypoint.prd.sh"]
     environment:
-      - NODE_ENV=testing
       - PORT=8082
       - DATABASE_URL=${DATABASE_URL}
       - API_URL=http://toon-tst:3000

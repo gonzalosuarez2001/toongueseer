@@ -38,12 +38,12 @@ jobs:
           
             # App
             cd /opt/toongueseer/frontend
-            docker build -t toonguesser:testing -f Dockerfile.tst .
+            docker build -t toonguesser:testing -f Dockerfile.prd .
             docker compose -f compose.tst.yaml up -d --remove-orphans --force-recreate
 
             # Cron
             cd /opt/toongueseer/cron
-            docker build -t toonguesser-cron:testing -f Dockerfile.tst .
+            docker build -t toonguesser-cron:testing -f Dockerfile.prd .
             docker compose -f compose.tst.yaml up -d --remove-orphans --force-recreate
 
             # Cleanup
