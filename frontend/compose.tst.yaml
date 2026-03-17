@@ -10,7 +10,10 @@ services:
       - "host.docker.internal:host-gateway"
     networks:
       - toon-net-tst
+      - nginx-net
 
 networks:
   toon-net-tst:
     name: toon-net-tst
+  nginx-net:
+    external: true

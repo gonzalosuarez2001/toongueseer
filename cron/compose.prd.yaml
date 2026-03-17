@@ -10,7 +10,10 @@ services:
       - API_URL=http://toon-prd:3000
     networks:
       - toon-net-prd
+      - nginx-net
 
 networks:
   toon-net-prd:
+    external: true
+  nginx-net:
     external: true

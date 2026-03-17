@@ -9,7 +9,10 @@ services:
       - DATABASE_URL=${DATABASE_URL}
     networks:
       - toon-net-prd
+      - nginx-net
 
 networks:
   toon-net-prd:
     name: toon-net-prd
+  nginx-net:
+    external: true
