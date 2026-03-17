@@ -4,7 +4,6 @@ services:
     image: toonguesser:testing
     entrypoint: ["./entrypoint.prd.sh"]
     environment:
-      - NODE_ENV=testing
       - NEXT_PUBLIC_MAX_DIFFICULTY=7
       - DATABASE_URL=${DATABASE_URL}
     extra_hosts:
