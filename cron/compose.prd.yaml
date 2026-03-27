@@ -1,3 +1,5 @@
+name: toonguesser-cron-prd
+
 services:
   cron:
     container_name: toon-cron-prd

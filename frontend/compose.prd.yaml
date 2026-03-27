@@ -1,3 +1,5 @@
+name: toonguesser-prd
+
 services:
   toon:
     container_name: toon-prd

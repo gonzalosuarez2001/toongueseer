@@ -1,3 +1,5 @@
+name: toonguesser-cron-tst
+
 services:
   cron:
     container_name: toon-cron-tst

@@ -1,3 +1,5 @@
+name: toonguesser-tst
+
 services:
   toon:
     container_name: toon-tst
