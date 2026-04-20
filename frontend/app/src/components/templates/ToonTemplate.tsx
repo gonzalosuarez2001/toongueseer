@@ -12,6 +12,7 @@ import ToonFootNote from "../organisms/ToonFootNote";
 import cartoonConfig from "../../cartoonConfig";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { setupToonGame } from "../../store/features/game/gameThunks";
+import { setField } from "../../store/features/game/gameSlice";
 
 export default function ToonTemplate({
   cartoon,
@@ -27,6 +28,9 @@ export default function ToonTemplate({
 
   useEffect(() => {
     dispatch(setupToonGame(cartoon, toons, dailyToon));
+    return () => {
+      dispatch(setField({ field: "loading", value: true }));
+    };
   }, []);
 
   let containerStyles = "";

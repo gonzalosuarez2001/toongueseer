@@ -9,8 +9,6 @@ const cartoon = "pokemon";
 export default async function Pokemon() {
   const toons: Toon[] = await getToons(cartoon);
   const dailyToon: Toon = await getDailyToon(cartoon);
-  
-  return (
-      <ToonTemplate toons={toons} dailyToon={dailyToon} cartoon={cartoon} />
-  );
+
+  return <ToonTemplate toons={toons} dailyToon={dailyToon} cartoon={cartoon} />;
 }
