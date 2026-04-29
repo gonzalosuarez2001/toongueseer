@@ -1,3 +1,4 @@
+"use client";
 import React, { useEffect, useState, useRef } from "react";
 import PixelableImage from "./PixelableImage";
 import { useAppSelector } from "../../store/hooks";

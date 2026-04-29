@@ -1,4 +1,28 @@
-# Cómo agregar un nuevo juego Cartoon
+# Toon Guesser
+
+Un juego diario estilo Wordle donde tenés que adivinar personajes de caricaturas. Cada día aparece un nuevo personaje con su imagen pixelada y desaturada, y vas ganando pistas con cada intento fallido hasta revelar quién es.
+
+Actualmente soporta tres franquicias: **Los Simpsons**, **Pokémon** y **Dragon Ball**.
+
+## Stack
+
+- **Frontend:** Next.js, TypeScript, Tailwind, Redux Toolkit, Prisma
+- **Cron:** Node.js/Express — rota el personaje del día cada medianoche UTC y revalida el caché de Next.js
+- **Base de datos:** PostgreSQL
+
+## Cómo correrlo localmente
+
+```bash
+# Frontend
+cd frontend && docker compose up -d
+
+# Cron
+cd cron && docker compose up -d
+```
+
+---
+
+## Cómo agregar un nuevo juego Cartoon
 
 Sigue estos pasos detallados para agregar un nuevo cartoon al proyecto:
 
