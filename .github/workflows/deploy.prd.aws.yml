@@ -32,8 +32,8 @@ jobs:
               f"export DATABASE_URL={shlex.quote(db_url)}",
               "git config --global --add safe.directory /home/ec2-user/toongueseer",
               "git -C /home/ec2-user/toongueseer pull https://github.com/gonzalosuarez2001/toongueseer.git main",
-              "cd /home/ec2-user/toongueseer/frontend && docker build -t toonguesser:production -f Dockerfile.prd . && docker compose -f compose.prd.yaml up -d --remove-orphans --force-recreate",
-              "cd /home/ec2-user/toongueseer/cron && docker build -t toonguesser-cron:production -f Dockerfile.prd . && docker compose -f compose.prd.yaml up -d --remove-orphans --force-recreate",
+              "cd /home/ec2-user/toongueseer/frontend && docker build -t toonguesser:production -f Dockerfile.prd . && docker-compose -f compose.prd.yaml up -d --remove-orphans --force-recreate",
+              "cd /home/ec2-user/toongueseer/cron && docker build -t toonguesser-cron:production -f Dockerfile.prd . && docker-compose -f compose.prd.yaml up -d --remove-orphans --force-recreate",
               "docker image prune -f",
           ])
           commands = [script]
