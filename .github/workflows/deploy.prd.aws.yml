@@ -28,6 +28,7 @@ jobs:
           db_url = os.environ["DATABASE_URL"]
           commands = [
               "set -e",
+              "export HOME=/root",
               f"export DATABASE_URL={shlex.quote(db_url)}",
               "git config --global --add safe.directory /home/ec2-user/toongueseer",
               "cd /home/ec2-user/toongueseer && git pull origin main",
