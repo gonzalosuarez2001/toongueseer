@@ -29,6 +29,7 @@ jobs:
           commands = [
               "set -e",
               f"export DATABASE_URL={shlex.quote(db_url)}",
+              "git config --global --add safe.directory /home/ec2-user/toongueseer",
               "cd /home/ec2-user/toongueseer && git pull origin main",
               "cd /home/ec2-user/toongueseer/frontend && docker build -t toonguesser:production -f Dockerfile.prd . && docker compose -f compose.prd.yaml up -d --remove-orphans --force-recreate",
               "cd /home/ec2-user/toongueseer/cron && docker build -t toonguesser-cron:production -f Dockerfile.prd . && docker compose -f compose.prd.yaml up -d --remove-orphans --force-recreate",
