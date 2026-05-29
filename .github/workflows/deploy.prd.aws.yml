@@ -1,0 +1,77 @@
+name: Deploy Production to EC2
+
+on:
+  workflow_dispatch:
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - name: Configure AWS credentials via OIDC
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::402561607577:role/github-actions-toongueseer-prd
+          aws-region: sa-east-1
+
+      - name: Deploy via SSM
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        run: |
+          python3 - << 'PYEOF'
+          import json, os, subprocess, sys, shlex
+
+          db_url = os.environ["DATABASE_URL"]
+          commands = [
+              "set -e",
+              f"export DATABASE_URL={shlex.quote(db_url)}",
+              "cd /home/ec2-user/toongueseer && git pull origin main",
+              "cd /home/ec2-user/toongueseer/frontend && docker build -t toonguesser:production -f Dockerfile.prd . && docker compose -f compose.prd.yaml up -d --remove-orphans --force-recreate",
+              "cd /home/ec2-user/toongueseer/cron && docker build -t toonguesser-cron:production -f Dockerfile.prd . && docker compose -f compose.prd.yaml up -d --remove-orphans --force-recreate",
+              "docker image prune -f",
+          ]
+
+          result = subprocess.run(
+              [
+                  "aws", "ssm", "send-command",
+                  "--instance-ids", "i-0239ef770c91ed8f1",
+                  "--document-name", "AWS-RunShellScript",
+                  "--parameters", json.dumps({"commands": commands}),
+                  "--query", "Command.CommandId",
+                  "--output", "text",
+              ],
+              capture_output=True, text=True, check=True,
+          )
+
+          command_id = result.stdout.strip()
+          print(f"SSM Command ID: {command_id}")
+
+          subprocess.run(
+              [
+                  "aws", "ssm", "wait", "command-executed",
+                  "--command-id", command_id,
+                  "--instance-id", "i-0239ef770c91ed8f1",
+              ],
+              check=True,
+          )
+
+          out = subprocess.run(
+              [
+                  "aws", "ssm", "get-command-invocation",
+                  "--command-id", command_id,
+                  "--instance-id", "i-0239ef770c91ed8f1",
+              ],
+              capture_output=True, text=True, check=True,
+          )
+
+          response = json.loads(out.stdout)
+          print(response.get("StandardOutputContent", ""))
+
+          if response.get("StatusDetails") != "Success":
+              print(response.get("StandardErrorContent", ""), file=sys.stderr)
+              sys.exit(1)
+          PYEOF
