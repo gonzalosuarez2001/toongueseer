@@ -56,7 +56,7 @@ jobs:
                   "--command-id", command_id,
                   "--instance-id", "i-0239ef770c91ed8f1",
               ],
-              check=True,
+              check=False,
           )
 
           out = subprocess.run(
@@ -69,9 +69,12 @@ jobs:
           )
 
           response = json.loads(out.stdout)
+          print("=== STDOUT ===")
           print(response.get("StandardOutputContent", ""))
+          print("=== STDERR ===")
+          print(response.get("StandardErrorContent", ""))
 
           if response.get("StatusDetails") != "Success":
-              print(response.get("StandardErrorContent", ""), file=sys.stderr)
+              print(f"Deploy failed with status: {response.get('StatusDetails')}", file=sys.stderr)
               sys.exit(1)
           PYEOF
